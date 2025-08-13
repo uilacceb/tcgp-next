@@ -16,12 +16,13 @@ export default async function Home() {
   const pokemons: Pokemon[] = await res.json();
   return (
     <main>
-      {pokemons.map((p) => (
+      {/* {pokemons.map((p) => (
         <div key={Math.random()}>
           <li key={p.id}>{p.name}</li>
           {/* <Image src={p.image} alt={p.name} width={100} height={170}></Image> */}
-        </div>
-      ))}
+      {/* </div>
+      ))} */}
+      Hello world
     </main>
   );
 }
