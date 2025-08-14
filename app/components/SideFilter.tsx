@@ -1,32 +1,77 @@
-import Image from "next/image";
 import React from "react";
-import { FilterRarity, FilterEnergy } from "../filter";
+import { FilterRarity, FilterEnergy, FilterPacks } from "../filter";
 
 const SideFilter = () => {
   return (
-    <div className="w-[200px]">
+    <div className="lg:w-[200px] hidden md:block ">
       <div>
-        <h1>Packs</h1>
+        <h1 className="font-bold text-2xl">Packs</h1>
+        <FilterPacks
+          packs={[
+            { src: "/packs/lugia.webp", name: "Lugia" },
+            { src: "/packs/ho-oh.webp", name: "Ho-Oh" },
+            { src: "/packs/shared.png", name: "Shared" },
+          ]}
+        />
       </div>
-      <div>
-        <h1>Rarity</h1>
+      <div className="pt-4">
+        <h1 className="font-bold text-2xl">Rarity</h1>
         {/* diamond */}
-        <FilterRarity src="/rarity/diamond.webp" num={1} />
-        <FilterRarity src="/rarity/diamond.webp" num={2} />
-        <FilterRarity src="/rarity/diamond.webp" num={3} />
-        <FilterRarity src="/rarity/diamond.webp" num={4} />
+        <FilterRarity src="/rarity/diamond.webp" count={1} name="diamond" />
+        <FilterRarity src="/rarity/diamond.webp" count={2} name="diamond" />
+        <FilterRarity src="/rarity/diamond.webp" count={3} name="diamond" />
+        <FilterRarity src="/rarity/diamond.webp" count={4} name="diamond" />
+
         {/* stars */}
-        <FilterRarity src="/rarity/star.webp" num={1} />
-        <FilterRarity src="/rarity/star.webp" num={2} />
-        <FilterRarity src="/rarity/star.webp" num={3} />
+        <FilterRarity
+          src="/rarity/star.webp"
+          count={1}
+          width={18}
+          height={18}
+          name="star"
+        />
+        <FilterRarity
+          src="/rarity/star.webp"
+          count={2}
+          name="star"
+          width={18}
+          height={18}
+        />
+        <FilterRarity
+          src="/rarity/star.webp"
+          count={3}
+          name="star"
+          width={18}
+          height={18}
+        />
+
         {/* shining */}
-        <FilterRarity src="/rarity/shiny.webp" num={1} />
-        <FilterRarity src="/rarity/shiny.webp" num={2} />
+        <FilterRarity
+          src="/rarity/shiny.webp"
+          count={1}
+          name="shining"
+          width={18}
+          height={18}
+        />
+        <FilterRarity
+          src="/rarity/shiny.webp"
+          count={2}
+          name="shining"
+          width={18}
+          height={18}
+        />
+
         {/* crown */}
-        <FilterRarity src="/rarity/crown.webp" num={1} />
+        <FilterRarity
+          src="/rarity/crown.webp"
+          count={1}
+          name="crown"
+          width={23}
+          height={18}
+        />
       </div>
-      <div>
-        <h1>Energy type</h1>
+      <div className="pt-4">
+        <h1 className="font-bold text-2xl">Energy type</h1>
         <FilterEnergy src="/type/darkness.webp" name="darkness" />
         <FilterEnergy src="/type/colorless.webp" name="colorless" />
         <FilterEnergy src="/type/dragon.webp" name="dragon" />
