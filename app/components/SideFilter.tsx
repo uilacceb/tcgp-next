@@ -1,9 +1,21 @@
 import React from "react";
 import { FilterRarity, FilterEnergy, FilterPacks } from "../filter";
+// import { usePathname, useSearchParams } from "next/navigation";
 
 const SideFilter = () => {
+  // const pathname = usePathname();
+  // const searchParams = useSearchParams();
+  // const current = searchParams.get("pack");
+
+  // //set up params of the url
+  // const hrefFor = (name?: string) => {
+  //   const sp = new URLSearchParams(searchParams);
+  //   if (!name) sp.delete("pack"); else sp.set("pack", name);
+  //   const qs = sp.toString();
+  //   return qs ? `${pathname}?${qs}` : pathname;
+  // };
   return (
-    <div className="lg:w-[200px] hidden md:block ">
+    <div className="lg:w-[200px] hidden md:block pr-2">
       <div>
         <h1 className="font-bold text-2xl">Packs</h1>
         <FilterPacks

@@ -7,7 +7,7 @@ const A4 = async () => {
   const a4Pokemons: Pokemon[] = await fetchSeries("a4");
 
   return (
-    <div className="flex">
+    <div className="flex py-8 px-6">
       <div>
         <SideFilter />
       </div>

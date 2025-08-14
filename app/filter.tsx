@@ -1,4 +1,6 @@
+"use client";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 type RarityProps = {
   name: string;
@@ -16,14 +18,14 @@ export const FilterRarity = ({
   height = 30,
 }: RarityProps) => {
   return (
-    <div className="flex py-2 my-1 border-b-1 border-[#e3e3e3] ">
+    <div className="flex py-2 my-1 border-b-1 border-[#e3e3e3] cursor-pointer">
       {Array.from({ length: count }).map((_, i) => (
         <Image
           key={i}
           src={src}
           width={width}
           height={height}
-          alt={`${name} - logo`} // decorative
+          alt={`${name} - logo`}
           aria-hidden="true"
         />
       ))}
@@ -34,7 +36,7 @@ export const FilterRarity = ({
 export const FilterEnergy = ({ src, name }: { src: string; name: string }) => {
   return (
     <>
-      <div className="flex my-1 py-2 border-b-1 border-[#e3e3e3] ">
+      <div className="flex my-1 py-2 border-b-1 border-[#e3e3e3] cursor-pointer">
         <Image src={src} height={15} width={22} alt="energy image" />
         <h1 className="font-bold pl-2">{name}</h1>
       </div>
@@ -45,13 +47,15 @@ export const FilterEnergy = ({ src, name }: { src: string; name: string }) => {
 type Pack = { src: string; name: string };
 
 export const FilterPacks = ({ packs }: { packs: Pack[] }) => {
+  const pathname = usePathname();
+  console.log(pathname);
   return (
     <>
       <div className="flex justify-start gap-4 pt-2">
         {packs.map(({ src, name }) => (
           <div
             key={src}
-            className="flex flex-col items-center gap-1 justify-end"
+            className="flex flex-col items-center gap-1 justify-end cursor-pointer"
           >
             <Image src={src} alt={`${name} - pack`} width={40} height={65} />
             <p className="text-sm">{name}</p>
