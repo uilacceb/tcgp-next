@@ -9,7 +9,7 @@ export interface Pokemon {
 
 export const fetchPokemons = async () => {
   const res = await fetch(
-    "https://raw.githubusercontent.com/chase-manning/pokemon-tcg-pocket-cards/refs/heads/main/v4.json"
+    "https://raw.githubusercontent.com/uilacceb/simplified-pokemon-api/refs/heads/main/pokemonAPI.json"
   );
   const pokemon: Pokemon[] = await res.json();
   return pokemon;
