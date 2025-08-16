@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { PackMeta } from "./lib/pokemonDB";
 
 type RarityProps = {
   name: string;
@@ -44,24 +45,4 @@ export const FilterEnergy = ({ src, name }: { src: string; name: string }) => {
   );
 };
 
-type Pack = { src: string; name: string };
 
-export const FilterPacks = ({ packs }: { packs: Pack[] }) => {
-  const pathname = usePathname();
-  console.log(pathname);
-  return (
-    <>
-      <div className="flex justify-start gap-4 pt-2">
-        {packs.map(({ src, name }) => (
-          <div
-            key={src}
-            className="flex flex-col items-center gap-1 justify-end cursor-pointer"
-          >
-            <Image src={src} alt={`${name} - pack`} width={40} height={65} />
-            <p className="text-sm">{name}</p>
-          </div>
-        ))}
-      </div>
-    </>
-  );
-};

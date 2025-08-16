@@ -1,8 +1,10 @@
 "use client";
 import React from "react";
-import { FilterRarity, FilterEnergy, FilterPacks } from "../filter";
+import { FilterRarity, FilterEnergy } from "../filterUI";
 import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { PackMeta, pokemonDB } from "../lib/pokemonDB";
+import Image from "next/image";
 
 const SideFilter = () => {
   const pathname = usePathname();
@@ -35,18 +37,53 @@ const SideFilter = () => {
     // If there are query params, return "/a4?..." else just "/a4"
     return queryString ? `${pathname}?${queryString}` : pathname;
   };
+  const serieId = pathname.split("/")[1]; // "A4"
+  const serie = pokemonDB.find(
+    (s) => s.id.toLowerCase() === serieId.toLowerCase()
+  );
+  const serieName = serie?.name;
+
+  const getPacks = (): PackMeta[] => {
+    if (!serie) throw new Error(`Unknown series: ${serie}`);
+    return serie.packs;
+  };
 
   return (
     <div className="lg:w-[200px] hidden md:block pr-2">
       <div>
         <h1 className="font-bold text-2xl">Packs</h1>
-        <FilterPacks
-          packs={[
-            { src: "/packs/lugia.webp", name: "Lugia" },
-            { src: "/packs/ho-oh.webp", name: "Ho-Oh" },
-            { src: "/packs/shared.png", name: "Shared" },
-          ]}
-        />
+        <div className="flex justify-start gap-4 pt-2 items-baseline">
+          {getPacks()?.map(({ name, src }) => (
+            <Link key={name} href={hrefForFilters({ pack: name })}>
+              <div className="flex flex-col items-center gap-1 justify-end cursor-pointer">
+                <Image
+                  src={src}
+                  alt={`${name} - pack`}
+                  width={40}
+                  height={65}
+                />
+                <p className="text-sm">{name}</p>
+              </div>
+            </Link>
+          ))}
+          {/* Shared, only if there are at least 2 packs */}
+          {getPacks().length > 1 && serie && (
+            <Link
+              href={hrefForFilters({ pack: `Shared(${serieName})` })}
+              key="Shared"
+            >
+              <div className="flex flex-col items-center gap-1 justify-end cursor-pointer">
+                <Image
+                  src="/packs/shared.png"
+                  alt="Shared - pack"
+                  width={40}
+                  height={65}
+                />
+                <p className="text-sm">Shared</p>
+              </div>
+            </Link>
+          )}
+        </div>
       </div>
       <div className="pt-4">
         <h1 className="font-bold text-2xl">Rarity</h1>

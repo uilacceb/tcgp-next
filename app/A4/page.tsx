@@ -1,7 +1,8 @@
 import React from "react";
-import { fetchSeries, fetchPokemons, Pokemon } from "../fetchPokemons";
+import { fetchSeries, Pokemon } from "../fetchPokemons";
 import Image from "next/image";
 import SideFilter from "../components/SideFilter";
+
 
 type PageProps = {
   searchParams: {
@@ -13,10 +14,12 @@ type PageProps = {
 
 const A4 = async ({ searchParams }: PageProps) => {
   const a4Pokemons: Pokemon[] = await fetchSeries("a4");
+  const pack = searchParams.pack?.toLowerCase();
   const energy = searchParams.energyType?.toLowerCase();
   const rarity = searchParams.rarity;
 
   const filtered = a4Pokemons.filter((p) => {
+    if (pack)   return p.pack.toLowerCase() === pack; 
     if (energy) return p.type.toLowerCase() === energy;
     if (rarity) return p.rarity === rarity;
     return true; // no filter -> show all

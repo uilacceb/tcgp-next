@@ -10,7 +10,7 @@ export type SeriesMeta = {
 export const pokemonDB: SeriesMeta[] = [
   {
     id: "A4",
-    name: "Wisdom of Sea and Sky (A4)",
+    name: "Wisdom of Sea and Sky",
     logoURL: "/series/wisdom of sea and sky series.webp",
     packs: [
       { name: "Lugia", src: "/packs/lugia.webp" },
@@ -19,13 +19,13 @@ export const pokemonDB: SeriesMeta[] = [
   },
   {
     id: "A3b",
-    name: "Eevee Grove (A3b)",
+    name: "Eevee Grove",
     logoURL: "/series/eevee-grove series.webp",
     packs: [{ name: "Eevee Grove", src: "/packs/eevee-grove.webp" }],
   },
   {
     id: "A3a",
-    name: "Extradimentional Crisis (A3a)",
+    name: "Extradimentional Crisis",
     logoURL: "/series/extra Dimentional Crisis series.webp",
     packs: [
       {
@@ -36,7 +36,7 @@ export const pokemonDB: SeriesMeta[] = [
   },
   {
     id: "A3",
-    name: "Celestial Guardians (A3)",
+    name: "Celestial Guardians",
     logoURL: "/series/celestial guardians series.webp",
     packs: [
       { name: "Lunala", src: "/packs/lunala.webp" },
@@ -45,19 +45,19 @@ export const pokemonDB: SeriesMeta[] = [
   },
   {
     id: "A2b",
-    name: "Shining Revelry (A2b)",
+    name: "Shining Revelry",
     logoURL: "/series/shining revelry series.webp",
     packs: [{ name: "Shining Revelry", src: "/packs/shining-revelry.webp" }],
   },
   {
     id: "A2a",
-    name: "Triumphant Light (A2a)",
+    name: "Triumphant Light",
     logoURL: "/series/triumphant light series.webp",
     packs: [{ name: "Triumphant Light", src: "/packs/triumphant-light.webp" }],
   },
   {
     id: "A2",
-    name: "Space-Time Smackdown (A2)",
+    name: "Space-Time Smackdown",
     logoURL: "/series/space time smack down series.webp",
     packs: [
       { name: "Palkia", src: "/packs/palkia.webp" },
@@ -66,13 +66,13 @@ export const pokemonDB: SeriesMeta[] = [
   },
   {
     id: "A1a",
-    name: "Mythical Island (A1a)",
+    name: "Mythical Island",
     logoURL: "/series/mythical island series.webp",
     packs: [{ name: "Mew", src: "/packs/mew.webp" }],
   },
   {
     id: "A1",
-    name: "Genetic Apex (A1)",
+    name: "Genetic Apex",
     logoURL: "/series/genetic apex series.webp",
     packs: [
       { name: "Pikachu", src: "/packs/pikachu.webp" },
@@ -82,7 +82,7 @@ export const pokemonDB: SeriesMeta[] = [
   },
   {
     id: "PA",
-    name: "Promo-A (P-A)",
+    name: "Promo-A",
     logoURL: "/series/promo A series.webp",
     packs: [],
   },
