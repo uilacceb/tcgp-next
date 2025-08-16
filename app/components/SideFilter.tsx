@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
 import { FilterRarity, FilterEnergy } from "../filterUI";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { PackMeta, pokemonDB } from "../lib/pokemonDB";
 import Image from "next/image";
 
 const SideFilter = () => {
+  const { series } = useParams<{ series?: string }>();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -43,16 +44,18 @@ const SideFilter = () => {
   );
   const serieName = serie?.name;
 
-  const getPacks = (): PackMeta[] => {
-    if (!serie) throw new Error(`Unknown series: ${serie}`);
-    return serie.packs;
+  const getPacks = () => {
+    const serie = pokemonDB.find(
+      (s) => s.id.toLowerCase() === (series ?? "").toLowerCase()
+    );
+    return serie?.packs ?? []; // <-- no throw; empty list if invalid
   };
 
   return (
     <div className="lg:w-[200px] hidden md:block pr-2">
       <div>
         <h1 className="font-bold text-2xl">Packs</h1>
-        <div className="flex justify-start gap-4 pt-2 items-baseline">
+        <div className="flex justify-start gap-4 pt-2 items-baseline flex-wrap">
           {getPacks()?.map(({ name, src }) => (
             <Link key={name} href={hrefForFilters({ pack: name })}>
               <div className="flex flex-col items-center gap-1 justify-end cursor-pointer">
@@ -67,7 +70,7 @@ const SideFilter = () => {
             </Link>
           ))}
           {/* Shared, only if there are at least 2 packs */}
-          {getPacks().length > 1 && serie && (
+          {getPacks().length > 1 && (
             <Link
               href={hrefForFilters({ pack: `Shared(${serieName})` })}
               key="Shared"

@@ -84,7 +84,7 @@ export const pokemonDB: SeriesMeta[] = [
     id: "PA",
     name: "Promo-A",
     logoURL: "/series/promo A series.webp",
-    packs: [],
+    packs: [{ name: "Promo-A", src: "/series/promo A series.webp" }],
   },
 ];
 
