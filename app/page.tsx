@@ -1,21 +1,26 @@
 import SeriesCard from "./components/SeriesCard";
 import { pokemonDB } from "./lib/pokemonDB";
 
+// Home.tsx
 export default async function Home() {
   return (
-    <main className="grid lg:grid-cols-4 lg:gap-6 md:grid-cols-2 md:gap-4 gap-2 justify-center items-center">
-      {pokemonDB.map((p) => {
-        return (
-          <>
-            <SeriesCard
-              series={p.id}
-              name={p.name}
-              logoURL={p.logoURL}
-              packURL={p.packs.map((pack) => pack.src)}
-            />
-          </>
-        );
-      })}
+    //lets the grid choose how many columns fit, wrapping automatically and shrinking each column down to 260px if needed.
+    <main
+      className="grid gap-6
+                 grid-cols-[repeat(auto-fit,minmax(350px,1fr))] px-4"
+    >
+      {pokemonDB.map((p) => (
+        <div key={p.id} className="min-w-0">
+          {" "}
+          {/* allow shrinking */}
+          <SeriesCard
+            series={p.id}
+            name={p.name}
+            logoURL={p.logoURL}
+            packURL={p.packs.map((pack) => pack.src)}
+          />
+        </div>
+      ))}
     </main>
   );
 }
