@@ -52,7 +52,7 @@ const SideFilter = () => {
   };
 
   return (
-    <div className="lg:w-[200px] hidden md:block pr-2">
+    <div className="lg:w-[200px] hidden md:block pr-2 md:w-[150px]">
       <div>
         <h1 className="font-bold text-2xl">Packs</h1>
         <div className="flex justify-start gap-4 pt-2 items-baseline flex-wrap">

@@ -45,7 +45,7 @@ export default async function SeriesPage({ params, searchParams }: PageProps) {
       <div>
         <SideFilter />
       </div>
-      <div className="grid grid-cols-4 justify-center md:grid-cols-6 lg:grid-cols-8">
+      <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-x-4 gap-y-6 w-full auto-rows-max">
         {filtered.length === 0 && (
           <p className="col-span-full text-sm opacity-70">
             No cards match your filter.
@@ -53,13 +53,13 @@ export default async function SeriesPage({ params, searchParams }: PageProps) {
         )}
 
         {filtered.map((p) => (
-          <div key={p.id} className="aspect-[3/4] ">
+          <div key={p.id}>
             <Image
               src={p.image}
               alt={p.name}
-              width={100}
-              height={175}
-              className="w-[100px] h-[175px] md:w-[150px] md:h-auto lg:w-[200px] lg:h-auto"
+              width={140}
+              height={200}
+              className="aspect-[7/10] md:w-[150px] md:h-auto lg:w-[200px] lg:h-auto "
             />
           </div>
         ))}
