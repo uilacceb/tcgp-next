@@ -17,8 +17,8 @@ const SeriesCard = ({
     <Link href={`/${series}`} className="block">
       <div
         className=" p-6 flex flex-col items-center gap-4
-                   border border-slate-200 shadow-2xl rounded-4xl
-                   aspect-[3/4] overflow-hidden"
+                   border-2 border-slate-700 bg-white drop-shadow-xl/25  rounded-4xl
+                   aspect-[3/4] overflow-hidden dark:shadow-gray-50 dark:border-0"
       >
         {/* Top: logo + name */}
         <div className="flex-1 w-full flex flex-col items-center justify-between">

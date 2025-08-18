@@ -3,8 +3,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="p-4 flex justify-center items-center bg-slate-700">
-      <p className="lg:w-[50%] md:w-[70%] text-white p-2">
+    <footer className="p-4 flex justify-center items-center">
+      <p className="lg:w-[50%] md:w-[70%]p-2">
         <Image
           src="/psyduck.png"
           alt="psyduck logo"
