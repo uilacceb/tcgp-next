@@ -25,7 +25,7 @@ const SeriesCard = ({
             height={100}
             className="p-3 max-w-full h-auto object-contain"
           />
-          <p className="font-bold text-2xl text-center hover:text-[#69808c]">
+          <p className="font-bold text-2xl text-center">
             {name}
           </p>
         </div>

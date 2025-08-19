@@ -53,13 +53,33 @@ export default async function SeriesPage({ params, searchParams }: PageProps) {
         )}
 
         {filtered.map((p) => (
-          <div key={p.id}>
+          <div
+            key={p.id}
+            className="relative w-fit group overflow-hidden rounded-[15px] 
+                    transition-transform duration-500 ease-in-out 
+                    hover:scale-105 hover:shadow-[0_0_20px_rgba(0,0,0,0.5)] dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.8)]"
+          >
+            {/* Shine layer */}
+            <div
+              className="absolute top-0 left-0 w-full h-full z-[2] 
+             pointer-events-none 
+             before:content-[''] before:absolute before:top-[-50%] before:left-[-50%]
+             before:w-[200%] before:h-[200%]
+             before:rotate-[45deg]
+             before:bg-[linear-gradient(45deg,transparent,rgba(255,255,255,0.7),transparent)]
+             before:transition-transform before:duration-700
+             before:opacity-0 group-hover:before:opacity-100 
+             group-hover:before:translate-x-full group-hover:before:translate-y-full"
+            />
+
+            {/* Image */}
             <Image
               src={p.image}
               alt={p.name}
               width={140}
               height={200}
-              className="aspect-[7/10] md:w-[150px] md:h-auto lg:w-[200px] lg:h-auto "
+              className="aspect-[7/10] md:w-[150px] lg:w-[200px] 
+                      relative z-[1] rounded-[15px]"
             />
           </div>
         ))}
