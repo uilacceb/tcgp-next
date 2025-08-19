@@ -33,7 +33,7 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
-          enableSystem={true}
+          enableSystem={false}
         >
           <Header />
           <main className="flex-1 p-2"> {children}</main>

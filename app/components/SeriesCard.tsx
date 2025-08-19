@@ -15,11 +15,7 @@ const SeriesCard = ({
 }) => {
   return (
     <Link href={`/${series}`} className="block">
-      <div
-        className=" p-6 flex flex-col items-center gap-4
-                   border-2 border-slate-700 bg-white drop-shadow-xl/25  rounded-4xl
-                   aspect-[3/4] overflow-hidden dark:shadow-gray-50 dark:border-0"
-      >
+      <div className="p-6 flex flex-col items-center gap-4 shadow-xl/50 rounded-4xl inset-shadow-lg aspect-[3/4] bg-[var(--card-background)] hover:scale-105 ease-in-out duration-300 ">
         {/* Top: logo + name */}
         <div className="flex-1 w-full flex flex-col items-center justify-between">
           <Image
@@ -29,7 +25,9 @@ const SeriesCard = ({
             height={100}
             className="p-3 max-w-full h-auto object-contain"
           />
-          <p className="font-bold text-2xl text-center">{name}</p>
+          <p className="font-bold text-2xl text-center hover:text-[#69808c]">
+            {name}
+          </p>
         </div>
 
         {/* Bottom: packs */}

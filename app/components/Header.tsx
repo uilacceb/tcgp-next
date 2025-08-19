@@ -10,7 +10,7 @@ const Header = () => {
     <div className="flex items-center justify-between p-4">
       <Link href="/">
         <Image
-          src="/logo.png"
+          src="/icons/logo.png"
           alt="logo"
           width={100}
           height={100}

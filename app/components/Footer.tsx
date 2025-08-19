@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="p-4 flex justify-center items-center">
       <p className="lg:w-[50%] md:w-[70%]p-2">
         <Image
-          src="/psyduck.png"
+          src="/icons/psyduck.png"
           alt="psyduck logo"
           width={30}
           height={30}

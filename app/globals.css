@@ -1,13 +1,17 @@
 @import "tailwindcss";
 
+@variant dark (.dark &);
+
 :root {
-  --background: #f1f1f1;
-  --foreground: #282e33;
+  --background: #d3d9db;
+  --foreground: #001c29;
+  --card-background: #ffffff;
 }
 
 html.dark {
-  --background: #282e33;
-  --foreground: #F7F8F9;
+  --background: #001c29;
+  --foreground: #d3d9db;
+  --card-background: #0d2f3f;
 }
 
 body {
