@@ -19,17 +19,19 @@ export const FilterRarity = ({
   height = 30,
 }: RarityProps) => {
   return (
-    <div className="flex py-2 my-1 border-b-1 border-[#e3e3e3] cursor-pointer">
-      {Array.from({ length: count }).map((_, i) => (
-        <Image
-          key={i}
-          src={src}
-          width={width}
-          height={height}
-          alt={`${name} - logo`}
-          aria-hidden="true"
-        />
-      ))}
+    <div className="flex py-2 my-1 border-b-1 border-[#e3e3e3] cursor-pointer ">
+      <div className="flex jump-on-hover">
+        {Array.from({ length: count }).map((_, i) => (
+          <Image
+            key={i}
+            src={src}
+            width={width}
+            height={height}
+            alt={`${name} - logo`}
+            aria-hidden="true"
+          />
+        ))}
+      </div>
     </div>
   );
 };
@@ -44,5 +46,3 @@ export const FilterEnergy = ({ src, name }: { src: string; name: string }) => {
     </>
   );
 };
-
-

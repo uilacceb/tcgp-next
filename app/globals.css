@@ -2,6 +2,31 @@
 
 @variant dark (.dark &);
 
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-7px);
+  }
+  60% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@layer utilities {
+  .jump-on-hover {
+    @apply transition-transform duration-300;
+  }
+
+  .jump-on-hover:hover {
+    animation: jump 0.4s ease;
+  }
+}
+
 :root {
   --background: #d3d9db;
   --foreground: #001c29;

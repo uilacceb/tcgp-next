@@ -52,13 +52,13 @@ const SideFilter = () => {
   };
 
   return (
-    <div className="lg:w-[200px] hidden md:block pr-2 md:w-[150px]">
+    <div className="lg:w-[200px] hidden md:block pr-2 md:w-[150px] ">
       <div>
         <h1 className="font-bold text-2xl">Packs</h1>
         <div className="flex justify-start gap-4 pt-2 items-baseline flex-wrap">
           {getPacks()?.map(({ name, src }) => (
             <Link key={name} href={hrefForFilters({ pack: name })}>
-              <div className="flex flex-col items-center gap-1 justify-end cursor-pointer">
+              <div className="flex flex-col items-center gap-1 justify-end cursor-pointer hover:scale-110 ease-in-out duration-200">
                 <Image
                   src={src}
                   alt={`${name} - pack`}

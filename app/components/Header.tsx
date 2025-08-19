@@ -7,7 +7,7 @@ import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
   return (
-    <div className="flex items-center justify-between p-4 sticky top-0 bg-[#d3d9db] dark:bg-[#001c29]">
+    <div className="flex items-center justify-between p-4 sticky top-0 bg-[#d3d9db] dark:bg-[#001c29] z-1000">
       <Link href="/">
         <Image
           src="/icons/logo.png"
