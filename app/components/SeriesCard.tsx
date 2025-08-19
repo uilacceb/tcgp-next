@@ -15,7 +15,7 @@ const SeriesCard = ({
 }) => {
   return (
     <Link href={`/${series}`} className="block">
-      <div className="p-6 flex flex-col items-center gap-4 shadow-xl/50 rounded-4xl inset-shadow-lg aspect-[3/4] bg-[var(--card-background)] hover:scale-105 ease-in-out duration-300 ">
+      <div className="p-6 flex flex-col items-center gap-4  rounded-4xl  aspect-[3/4] bg-[var(--card-background)]  hover:border-2 hover:border-[#001c29] hover:shadow-[15px_15px_5px_rgba(0,0,0,1)] hover:-translate-3   dark:hover:shadow-[10px_10px_5px_#d3d9db] dark:hover:border-1 dark:hover:border-[#d3d9db]">
         {/* Top: logo + name */}
         <div className="flex-1 w-full flex flex-col items-center justify-between">
           <Image
