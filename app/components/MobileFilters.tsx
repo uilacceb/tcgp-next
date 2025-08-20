@@ -60,7 +60,7 @@ export default function MobileFilters() {
                            [-webkit-overflow-scrolling:touch]"
               >
                 {/* Use the mobile variant so it isn't hidden by md: classes */}
-                <SideFilter variant="mobile" />
+                <SideFilter variant="mobile" onSelect={() => setOpen(false)} />
               </div>
             </div>
           </div>

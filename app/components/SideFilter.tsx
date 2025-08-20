@@ -13,7 +13,13 @@ type Filters = {
   rarity?: string;
   energyType?: string;
 };
-const SideFilter = ({ variant = "desktop" }: { variant?: Variant }) => {
+const SideFilter = ({
+  variant = "desktop",
+  onSelect,
+}: {
+  variant?: Variant;
+  onSelect?: () => void;
+}) => {
   const { series } = useParams<{ series?: string }>();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -64,7 +70,11 @@ const SideFilter = ({ variant = "desktop" }: { variant?: Variant }) => {
         <h1 className="font-bold text-2xl">Packs</h1>
         <div className="flex justify-start gap-4 pt-2 items-baseline flex-wrap">
           {getPacks()?.map(({ name, src }) => (
-            <Link key={name} href={hrefForFilters({ pack: name })}>
+            <Link
+              key={name}
+              href={hrefForFilters({ pack: name })}
+              onClick={onSelect}
+            >
               <div className="flex flex-col items-center gap-1 justify-end cursor-pointer jump-on-hover">
                 <Image
                   src={src}
@@ -98,21 +108,21 @@ const SideFilter = ({ variant = "desktop" }: { variant?: Variant }) => {
       <div className="pt-4">
         <h1 className="font-bold text-2xl">Rarity</h1>
         {/* diamond */}
-        <Link href={hrefForFilters({ rarity: "◊" })}>
+        <Link href={hrefForFilters({ rarity: "◊" })} onClick={onSelect}>
           <FilterRarity src="/rarity/diamond.webp" count={1} name="diamond" />
         </Link>
-        <Link href={hrefForFilters({ rarity: "◊◊" })}>
+        <Link href={hrefForFilters({ rarity: "◊◊" })} onClick={onSelect}>
           <FilterRarity src="/rarity/diamond.webp" count={2} name="diamond" />
         </Link>
-        <Link href={hrefForFilters({ rarity: "◊◊◊" })}>
+        <Link href={hrefForFilters({ rarity: "◊◊◊" })} onClick={onSelect}>
           <FilterRarity src="/rarity/diamond.webp" count={3} name="diamond" />
         </Link>
-        <Link href={hrefForFilters({ rarity: "◊◊◊◊" })}>
+        <Link href={hrefForFilters({ rarity: "◊◊◊◊" })} onClick={onSelect}>
           <FilterRarity src="/rarity/diamond.webp" count={4} name="diamond" />
         </Link>
 
         {/* stars */}
-        <Link href={hrefForFilters({ rarity: "☆" })}>
+        <Link href={hrefForFilters({ rarity: "☆" })} onClick={onSelect}>
           <FilterRarity
             src="/rarity/star.webp"
             count={1}
@@ -121,7 +131,7 @@ const SideFilter = ({ variant = "desktop" }: { variant?: Variant }) => {
             name="star"
           />
         </Link>
-        <Link href={hrefForFilters({ rarity: "☆☆" })}>
+        <Link href={hrefForFilters({ rarity: "☆☆" })} onClick={onSelect}>
           <FilterRarity
             src="/rarity/star.webp"
             count={2}
@@ -130,7 +140,7 @@ const SideFilter = ({ variant = "desktop" }: { variant?: Variant }) => {
             height={18}
           />
         </Link>
-        <Link href={hrefForFilters({ rarity: "☆☆☆" })}>
+        <Link href={hrefForFilters({ rarity: "☆☆☆" })} onClick={onSelect}>
           <FilterRarity
             src="/rarity/star.webp"
             count={3}
@@ -141,7 +151,7 @@ const SideFilter = ({ variant = "desktop" }: { variant?: Variant }) => {
         </Link>
 
         {/* shining */}
-        <Link href={hrefForFilters({ rarity: "✵" })}>
+        <Link href={hrefForFilters({ rarity: "✵" })} onClick={onSelect}>
           <FilterRarity
             src="/rarity/shiny.webp"
             count={1}
@@ -150,7 +160,7 @@ const SideFilter = ({ variant = "desktop" }: { variant?: Variant }) => {
             height={18}
           />
         </Link>
-        <Link href={hrefForFilters({ rarity: "✵✵" })}>
+        <Link href={hrefForFilters({ rarity: "✵✵" })} onClick={onSelect}>
           <FilterRarity
             src="/rarity/shiny.webp"
             count={2}
@@ -161,7 +171,7 @@ const SideFilter = ({ variant = "desktop" }: { variant?: Variant }) => {
         </Link>
 
         {/* crown */}
-        <Link href={hrefForFilters({ rarity: "♕" })}>
+        <Link href={hrefForFilters({ rarity: "♕" })} onClick={onSelect}>
           <FilterRarity
             src="/rarity/crown.webp"
             count={1}
@@ -173,34 +183,52 @@ const SideFilter = ({ variant = "desktop" }: { variant?: Variant }) => {
       </div>
       <div className="pt-4">
         <h1 className="font-bold text-2xl">Energy type</h1>
-        <Link href={hrefForFilters({ energyType: "darkness" })}>
+        <Link
+          href={hrefForFilters({ energyType: "darkness" })}
+          onClick={onSelect}
+        >
           <FilterEnergy src="/type/darkness.webp" name="darkness" />
         </Link>
-        <Link href={hrefForFilters({ energyType: "colorless" })}>
+        <Link
+          href={hrefForFilters({ energyType: "colorless" })}
+          onClick={onSelect}
+        >
           <FilterEnergy src="/type/colorless.webp" name="colorless" />
         </Link>
-        <Link href={hrefForFilters({ energyType: "dragon" })}>
+        <Link
+          href={hrefForFilters({ energyType: "dragon" })}
+          onClick={onSelect}
+        >
           <FilterEnergy src="/type/dragon.webp" name="dragon" />
         </Link>
-        <Link href={hrefForFilters({ energyType: "fighting" })}>
+        <Link
+          href={hrefForFilters({ energyType: "fighting" })}
+          onClick={onSelect}
+        >
           <FilterEnergy src="/type/fighting.webp" name="fighting" />
         </Link>
-        <Link href={hrefForFilters({ energyType: "fire" })}>
+        <Link href={hrefForFilters({ energyType: "fire" })} onClick={onSelect}>
           <FilterEnergy src="/type/fire.webp" name="fire" />
         </Link>
-        <Link href={hrefForFilters({ energyType: "grass" })}>
+        <Link href={hrefForFilters({ energyType: "grass" })} onClick={onSelect}>
           <FilterEnergy src="/type/grass.webp" name="grass" />
         </Link>
-        <Link href={hrefForFilters({ energyType: "lightning" })}>
+        <Link
+          href={hrefForFilters({ energyType: "lightning" })}
+          onClick={onSelect}
+        >
           <FilterEnergy src="/type/lightning.webp" name="lightning" />
         </Link>
-        <Link href={hrefForFilters({ energyType: "metal" })}>
+        <Link href={hrefForFilters({ energyType: "metal" })} onClick={onSelect}>
           <FilterEnergy src="/type/metal.webp" name="metal" />
         </Link>
-        <Link href={hrefForFilters({ energyType: "psychic" })}>
+        <Link
+          href={hrefForFilters({ energyType: "psychic" })}
+          onClick={onSelect}
+        >
           <FilterEnergy src="/type/psychic.webp" name="psychic" />
         </Link>
-        <Link href={hrefForFilters({ energyType: "water" })}>
+        <Link href={hrefForFilters({ energyType: "water" })} onClick={onSelect}>
           <FilterEnergy src="/type/water.webp" name="water" />
         </Link>
       </div>
