@@ -20,11 +20,11 @@ export default function Header() {
       </Link>
 
       <div className="flex gap-2 items-center">
-        <input
+        {/* <input
           className="border-2 border-gray-400 h-[70%] px-3 py-2 rounded-full
                      bg-[#f1f1f1] dark:text-zinc-900"
           placeholder="Search pokemon"
-        />
+        /> */}
         {/* If you want a header filter icon instead, place it here and hook it to MobileFilters via context or a global event. */}
         <ThemeToggle />
       </div>
