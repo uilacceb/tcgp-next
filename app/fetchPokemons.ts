@@ -17,8 +17,8 @@ export const fetchPokemons = async () => {
 
 export const fetchSeries = async (seriesNum: string) => {
   const pokemon = await fetchPokemons();
-  const a4Pokemon = pokemon.filter((p) => {
+  const pokemonSeries = pokemon.filter((p) => {
     return p.id.split("-")[0] === seriesNum;
   });
-  return a4Pokemon;
+  return pokemonSeries;
 };

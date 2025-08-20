@@ -3,6 +3,7 @@ import { fetchSeries, Pokemon } from "../fetchPokemons";
 import SideFilter from "../components/SideFilter";
 import { pokemonDB } from "../lib/pokemonDB";
 import MobileFilters from "../components/MobileFilters";
+import SingleCardInfo from "../components/SingleCardInfo";
 
 type PageProps = {
   params: Promise<{ series: string }>; // "A4", "A3b", ...
@@ -77,13 +78,11 @@ export default async function SeriesPage({ params, searchParams }: PageProps) {
             />
 
             {/* Image */}
-            <Image
+            <SingleCardInfo
               src={p.image}
               alt={p.name}
               width={140}
               height={200}
-              className="aspect-[7/10] md:w-[150px] lg:w-[200px] 
-                      relative z-[1]"
             />
           </div>
         ))}
