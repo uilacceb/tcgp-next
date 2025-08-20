@@ -4,38 +4,40 @@ import SideFilter from "../components/SideFilter";
 import { pokemonDB } from "../lib/pokemonDB";
 
 type PageProps = {
-  params: { series: string }; // "A4", "A3b", ...
-  searchParams: {
+  params: Promise<{ series: string }>; // "A4", "A3b", ...
+  searchParams: Promise<{
     pack?: string;
     rarity?: string;
     energyType?: string;
-  };
+  }>;
 };
 
 export default async function SeriesPage({ params, searchParams }: PageProps) {
-  const seriesId = params.series?.toLowerCase();
+  const { series } = await params;
+  const { pack, rarity, energyType } = await searchParams; 
+
+  const seriesId =  series?.toLowerCase();
   const cards: Pokemon[] = await fetchSeries(seriesId);
 
   // find current series meta to know how many packs it has
   const serieMeta = pokemonDB.find((s) => s.id.toLowerCase() === seriesId);
   const hasMultiplePacks = (serieMeta?.packs?.length ?? 0) > 1;
 
-  const pack = searchParams.pack?.toLowerCase();
-  const rarity = searchParams.rarity;
-  const energy = searchParams.energyType?.toLowerCase();
+  const packLocalized = pack?.toLowerCase();
+  const energyLocalized = energyType?.toLowerCase();
 
   const filtered = cards.filter((p) => {
     const cardPack = p.pack.toLowerCase();
     //If pack is defined (meaning you clicked a pack in the SideFilter):
-    if (pack) {
+    if (packLocalized) {
       // If the series has only one pack, selecting it should not exclude anything, This means: “Let this card through no matter what”.
       // Returning true in .filter() keeps the item.So every Pokémon in the series passes the filter.
       if (!hasMultiplePacks) return true;
 
       // Multi-pack series: selected pack + shared cards
-      return cardPack === pack;
+      return cardPack === packLocalized;
     }
-    if (energy) return p.type.toLowerCase() === energy;
+    if (energyLocalized) return p.type.toLowerCase() === energyLocalized;
     if (rarity) return p.rarity === rarity;
     return true; // no filter -> show all
   });
