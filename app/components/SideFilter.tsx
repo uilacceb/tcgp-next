@@ -6,16 +6,23 @@ import Link from "next/link";
 import { pokemonDB } from "../lib/pokemonDB";
 import Image from "next/image";
 
-const SideFilter = () => {
+type Variant = "desktop" | "mobile";
+
+type Filters = {
+  pack?: string;
+  rarity?: string;
+  energyType?: string;
+};
+const SideFilter = ({ variant = "desktop" }: { variant?: Variant }) => {
   const { series } = useParams<{ series?: string }>();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  type Filters = {
-    pack?: string;
-    rarity?: string;
-    energyType?: string;
-  };
+  const container =
+    variant === "desktop"
+      ? "hidden md:block lg:w-[200px] md:w-[150px] pr-2"
+      : "m-0 p-0 mt-[120px]";
+
   //set up params of the url
   const hrefForFilters = (next: Filters) => {
     // Make a mutable copy of the current URL query params
@@ -52,7 +59,7 @@ const SideFilter = () => {
   };
 
   return (
-    <div className="lg:w-[200px] hidden md:block pr-2 md:w-[150px] ">
+    <div className={container}>
       <div>
         <h1 className="font-bold text-2xl">Packs</h1>
         <div className="flex justify-start gap-4 pt-2 items-baseline flex-wrap">

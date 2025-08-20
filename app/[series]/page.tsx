@@ -2,6 +2,7 @@ import Image from "next/image";
 import { fetchSeries, Pokemon } from "../fetchPokemons";
 import SideFilter from "../components/SideFilter";
 import { pokemonDB } from "../lib/pokemonDB";
+import MobileFilters from "../components/MobileFilters";
 
 type PageProps = {
   params: Promise<{ series: string }>; // "A4", "A3b", ...
@@ -14,9 +15,9 @@ type PageProps = {
 
 export default async function SeriesPage({ params, searchParams }: PageProps) {
   const { series } = await params;
-  const { pack, rarity, energyType } = await searchParams; 
+  const { pack, rarity, energyType } = await searchParams;
 
-  const seriesId =  series?.toLowerCase();
+  const seriesId = series?.toLowerCase();
   const cards: Pokemon[] = await fetchSeries(seriesId);
 
   // find current series meta to know how many packs it has
@@ -46,6 +47,7 @@ export default async function SeriesPage({ params, searchParams }: PageProps) {
     <div className="flex py-8 px-6">
       <div>
         <SideFilter />
+        <MobileFilters />
       </div>
       <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-x-4 gap-y-6 w-full auto-rows-max">
         {filtered.length === 0 && (
@@ -57,7 +59,7 @@ export default async function SeriesPage({ params, searchParams }: PageProps) {
         {filtered.map((p) => (
           <div
             key={p.id}
-            className="relative w-fit group overflow-hidden rounded-[15px] 
+            className="relative w-fit group overflow-hidden rounded-[5px] 
                     transition-transform duration-500 ease-in-out 
                     hover:scale-105 hover:shadow-[0_0_20px_rgba(0,0,0,0.5)] dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.8)]"
           >
@@ -81,7 +83,7 @@ export default async function SeriesPage({ params, searchParams }: PageProps) {
               width={140}
               height={200}
               className="aspect-[7/10] md:w-[150px] lg:w-[200px] 
-                      relative z-[1] rounded-[15px]"
+                      relative z-[1]"
             />
           </div>
         ))}
