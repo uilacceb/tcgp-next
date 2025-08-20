@@ -1,7 +1,5 @@
 "use client";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { PackMeta } from "./lib/pokemonDB";
 
 type RarityProps = {
   name: string;
@@ -20,7 +18,7 @@ export const FilterRarity = ({
 }: RarityProps) => {
   return (
     <div className="flex py-2 my-1 border-b-1 border-[#e3e3e3] cursor-pointer ">
-      <div className="flex jump-on-hover">
+      <div className="flex jump-on-hover w-full">
         {Array.from({ length: count }).map((_, i) => (
           <Image
             key={i}
@@ -40,8 +38,10 @@ export const FilterEnergy = ({ src, name }: { src: string; name: string }) => {
   return (
     <>
       <div className="flex my-1 py-2 border-b-1 border-[#e3e3e3] cursor-pointer">
-        <Image src={src} height={15} width={22} alt="energy image" />
-        <h1 className="font-bold pl-2">{name}</h1>
+        <div className="flex w-full jump-on-hover">
+          <Image src={src} height={15} width={22} alt="energy image" />
+          <h1 className="font-bold pl-2">{name}</h1>
+        </div>
       </div>
     </>
   );
