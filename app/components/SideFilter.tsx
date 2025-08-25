@@ -51,7 +51,7 @@ const SideFilter = ({
     // If there are query params, return "/a4?..." else just "/a4"
     return queryString ? `${pathname}?${queryString}` : pathname;
   };
-  const serieId = pathname.split("/")[1]; // "A4"
+  const serieId = pathname.split("/")[1]; // eg "A4"
   const serie = pokemonDB.find(
     (s) => s.id.toLowerCase() === serieId.toLowerCase()
   );

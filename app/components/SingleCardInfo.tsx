@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 
@@ -13,6 +13,20 @@ type SingleCardInfoProps = {
 
 const SingleCardInfo = ({ src, alt, width, height }: SingleCardInfoProps) => {
   const [open, setOpen] = useState(false);
+  useEffect(() => {
+    if (!open) return;
+    const html = document.documentElement;
+    const prevOverflow = html.style.overflow;
+    const prevPaddingRight = html.style.paddingRight;
+
+    html.style.overflow = "auto"; // undo HeadlessUI scroll lock
+    html.style.paddingRight = ""; // undo scrollbar compensation
+
+    return () => {
+      html.style.overflow = prevOverflow;
+      html.style.paddingRight = prevPaddingRight;
+    };
+  }, [open]);
   return (
     <>
       <Image
@@ -29,10 +43,8 @@ const SingleCardInfo = ({ src, alt, width, height }: SingleCardInfoProps) => {
         onClose={() => setOpen(false)}
         className="relative z-10"
       >
-        <DialogBackdrop
-          transition
-          className="fixed inset-0 bg-gray-900/80 transition-opacity "
-        />
+        {/* The backdrop */}
+        <div className="fixed inset-0 bg-gray-900/80 transition-opacity "></div>
 
         <div className="fixed inset-0 z-10 ">
           <div className="flex justify-center items-center min-h-full ">
@@ -46,7 +58,7 @@ const SingleCardInfo = ({ src, alt, width, height }: SingleCardInfoProps) => {
                 width={width}
                 height={height}
                 onClick={() => setOpen(true)}
-                className="aspect-[7/10] w-[200px] md:w-[300px] lg:w-[400px] 
+                className="aspect-[7/10]  md:w-[300px] lg:w-[400px] 
                           relative z-[1]"
               />
             </DialogPanel>
