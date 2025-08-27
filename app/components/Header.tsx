@@ -86,12 +86,12 @@ export default function Header() {
           )}
         </div>
 
-        <button
+        {/* <button
           className="p-2 bg-white hover:bg-white cursor-pointer rounded-2xl"
           onClick={filterName}
         >
           Show all
-        </button>
+        </button> */}
         <ThemeToggle />
       </div>
     </div>
