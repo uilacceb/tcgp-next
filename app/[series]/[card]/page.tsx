@@ -24,24 +24,25 @@ export default async function CardPage({ params }: PageProps) {
     return serie?.packs ?? [];
   };
 
+  const norm = (s = "") =>
+    s
+      .toLowerCase() // 1) ignore case differences
+      .normalize("NFKD") // 2) split letters and accents (Unicode)
+      .replace(/[\u0300-\u036f]/g, "") // 3) drop the accent marks
+      .replace(/[^a-z0-9]/g, ""); // 4) remove everything not a–z or 0–9
+
   const fetchFinalPacks = () => {
     const packsOfSeries = fetchPacksOfSeries();
-    console.log("packs of series", packsOfSeries);
-    const packName = item.pack;
-    const isShared = (packName ?? "").toLowerCase().includes("shared");
-    console.log(packName);
-    if (isShared) {
-      return packsOfSeries;
-    } else {
-      const packs = packsOfSeries.filter((p) => {
-        return p.name.includes(packName);
-      });
-      return packs;
-    }
+    const packName = item.pack ?? "";
+    const isShared = norm(packName).includes("shared");
+    if (isShared) return packsOfSeries;
+
+    const target = norm(packName);
+    return packsOfSeries.filter((p) => norm(p.name) === target);
   };
 
   const finalPacks = fetchFinalPacks();
-
+  console.log("final pack", finalPacks);
   return (
     <main className="md:flex md:justify-center md:items-center md:pt-8">
       <div className="flex justify-center items-center ">
