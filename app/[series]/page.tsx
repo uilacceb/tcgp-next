@@ -4,6 +4,8 @@ import SideFilter from "../components/SideFilter";
 import { pokemonDB } from "../lib/pokemonDB";
 import MobileFilters from "../components/MobileFilters";
 import SingleCardInfo from "../components/SingleCardInfo";
+import Link from "next/link";
+import { cardIDFromCard } from "../lib/pokemonStore";
 
 type PageProps = {
   params: Promise<{ series: string }>; // "A4", "A3b", ...
@@ -50,6 +52,7 @@ export default async function SeriesPage({ params, searchParams }: PageProps) {
         <SideFilter />
         <MobileFilters />
       </div>
+
       <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-x-4 gap-y-6 w-full auto-rows-max">
         {filtered.length === 0 && (
           <p className="col-span-full text-sm opacity-70">
@@ -57,35 +60,42 @@ export default async function SeriesPage({ params, searchParams }: PageProps) {
           </p>
         )}
 
-        {filtered.map((p) => (
-          <div
-            key={p.id}
-            className="relative w-fit group overflow-hidden rounded-[5px] 
-                    transition-transform duration-500 ease-in-out 
-                    hover:scale-105 hover:shadow-[0_0_20px_rgba(0,0,0,0.5)] dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.8)]"
-          >
-            {/* Shine layer */}
-            <div
-              className="absolute top-0 left-0 w-full h-full z-[2] 
-             pointer-events-none 
-             before:content-[''] before:absolute before:top-[-50%] before:left-[-50%]
-             before:w-[200%] before:h-[200%]
-             before:rotate-[45deg]
-             before:bg-[linear-gradient(45deg,transparent,rgba(255,255,255,0.7),transparent)]
-             before:transition-transform before:duration-700
-             before:opacity-0 group-hover:before:opacity-100 
-             group-hover:before:translate-x-full group-hover:before:translate-y-full"
-            />
+        {filtered.map((p) => {
+          const card = cardIDFromCard(p); // <<< generate slug here
+          const href = `/${series}/${card}`;
 
-            {/* Image */}
-            <SingleCardInfo
-              src={p.image}
-              alt={p.name}
-              width={140}
-              height={200}
-            />
-          </div>
-        ))}
+          return (
+            <div
+              key={p.id}
+              className="relative w-fit group overflow-hidden rounded-[5px] 
+                         transition-transform duration-500 ease-in-out 
+                         hover:scale-105 hover:shadow-[0_0_20px_rgba(0,0,0,0.5)] 
+                         dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.8)]"
+            >
+              {/* Shine layer */}
+              <div
+                className="absolute top-0 left-0 w-full h-full z-[2] pointer-events-none 
+                           before:content-[''] before:absolute before:top-[-50%] before:left-[-50%]
+                           before:w-[200%] before:h-[200%]
+                           before:rotate-[45deg]
+                           before:bg-[linear-gradient(45deg,transparent,rgba(255,255,255,0.7),transparent)]
+                           before:transition-transform before:duration-700
+                           before:opacity-0 group-hover:before:opacity-100 
+                           group-hover:before:translate-x-full group-hover:before:translate-y-full"
+              />
+
+              <Link href={href}>
+                <Image
+                  src={p.image}
+                  alt={p.name}
+                  width={140}
+                  height={200}
+                  className="aspect-[7/10] relative z-[1] rounded-[5px]"
+                />
+              </Link>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
