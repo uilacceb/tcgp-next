@@ -96,9 +96,9 @@ export default async function CardPage({ params }: PageProps) {
           </div>
           <div className="font-bold  justify-between p-2 text-center md:text-3xl md:pb-6 flex items-center">
             <p className="font-medium">Rarity: </p>
-            <p>
+            <div>
               <RarityIcons name={item.name} rarity={item.rarity} />
-            </p>
+            </div>
           </div>
           <div className="flex  justify-between font-bold p-2 text-center md:text-3xl md:pb-6">
             <p className="font-medium">Type:</p>
