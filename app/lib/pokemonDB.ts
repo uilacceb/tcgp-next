@@ -53,7 +53,7 @@ export const pokemonDB: SeriesMeta[] = [
     id: "A2a",
     name: "Triumphant Light",
     logoURL: "/series/triumphant-light-series.webp",
-    packs: [{ name: "Triumphant Light", src: "/packs/triumphant-light.webp" }],
+    packs: [{ name: "Arceus", src: "/packs/triumphant-light.webp" }],
   },
   {
     id: "A2",
@@ -68,7 +68,7 @@ export const pokemonDB: SeriesMeta[] = [
     id: "A1a",
     name: "Mythical Island",
     logoURL: "/series/mythical-island-series.webp",
-    packs: [{ name: "Mew", src: "/packs/mew.webp" }],
+    packs: [{ name: "Mythical Island", src: "/packs/mew.webp" }],
   },
   {
     id: "A1",
