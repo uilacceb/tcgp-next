@@ -1,4 +1,6 @@
 // app/[series]/[card]/page.tsx
+
+import BackButton from "@/app/components/BackButton";
 import { pokemonDB } from "@/app/lib/pokemonDB";
 import { fetchCard } from "@/app/lib/pokemonStore";
 import Image from "next/image";
@@ -44,8 +46,11 @@ export default async function CardPage({ params }: PageProps) {
   const finalPacks = fetchFinalPacks();
   console.log("final pack", finalPacks);
   return (
-    <main className="md:flex md:justify-center md:items-center md:pt-8">
-      <div className="flex justify-center items-center ">
+    <main className="md:flex md:justify-center md:items-center md:pt-8 relative pt-10">
+      <div className=" top-0 left-1 absolute">
+        <BackButton />
+      </div>
+      <div className="flex justify-center items-center">
         <Image
           src={item.image}
           alt={item.name}

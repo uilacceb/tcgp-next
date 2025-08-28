@@ -62,15 +62,33 @@ export default function Header() {
 
       <div className="flex gap-2 items-center">
         <div ref={containerRef} className="relative">
-          <input
-            className="border-2 border-gray-400 h-[70%] px-3 py-2 rounded-full
-                     bg-[#f1f1f1] dark:text-zinc-900"
-            placeholder="Search pokemon"
-            onChange={(e) => {
-              setPokemonName(e.target.value);
-              setDropDownOpen(true);
-            }}
-          />
+          <div className="relative w-full max-w-sm">
+            <input
+              type="search"
+              className="w-full border-2 border-gray-400 h-10 pr-10 pl-3 rounded-full
+               bg-[#f1f1f1] text-zinc-900 dark:text-zinc-900"
+              placeholder="Search pokemon"
+              value={pokemonName}
+              onChange={(e) => {
+                setPokemonName(e.target.value);
+                setDropDownOpen(true);
+              }}
+              onFocus={() => setDropDownOpen(true)}
+            />
+            <button
+              type="button"
+              className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
+              aria-label="Search"
+            >
+              <Image
+                src="/icons/search.png"
+                alt="search icon"
+                width={18}
+                height={18}
+              />
+            </button>
+          </div>
+
           {filterResult.length > 0 && dropDownOpen && (
             <ul className="absolute z-10 w-full p-2 max-h-120 overflow-auto bg-white rounded-2xl">
               {filterResult.map((f) => (
