@@ -53,7 +53,7 @@ export default async function SeriesPage({ params, searchParams }: PageProps) {
         <MobileFilters />
       </div>
 
-      <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-x-4 gap-y-6 w-full auto-rows-max">
+      <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-x-4 gap-y-6 w-full auto-rows-max ">
         {filtered.length === 0 && (
           <p className="col-span-full text-sm opacity-70">
             No cards match your filter.
@@ -61,7 +61,7 @@ export default async function SeriesPage({ params, searchParams }: PageProps) {
         )}
 
         {filtered.map((p) => {
-          const card = cardIDFromCard(p); // <<< generate slug here
+          const card = cardIDFromCard(p);
           const href = `/${series}/${card}`;
 
           return (
@@ -85,12 +85,11 @@ export default async function SeriesPage({ params, searchParams }: PageProps) {
               />
 
               <Link href={href}>
-                <Image
+                <SingleCardInfo
                   src={p.image}
                   alt={p.name}
                   width={140}
                   height={200}
-                  className="aspect-[7/10] relative z-[1] rounded-[5px]"
                 />
               </Link>
             </div>

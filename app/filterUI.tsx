@@ -46,3 +46,60 @@ export const FilterEnergy = ({ src, name }: { src: string; name: string }) => {
     </>
   );
 };
+
+export const raritySymbolToName: Record<string, string> = {
+  "♕": "crown",
+
+  "◊": "diamond",
+
+  "☆": "star",
+
+  "✵": "shiny",
+};
+
+type RarityIconsProps = {
+  name: string;
+  rarity: string; // e.g. "◊◊" or "♕"
+  width?: number;
+  height?: number;
+};
+
+export const rarityImages: Record<string, string> = {
+  crown: "/rarity/crown.webp",
+  diamond: "/rarity/diamond.webp",
+  shiny: "/rarity/shiny.webp",
+  star: "/rarity/star.webp",
+};
+
+export function RarityIcons({
+  name,
+  rarity,
+  width = 20,
+  height = 35,
+}: RarityIconsProps) {
+  const glyphs = Array.from(rarity?.trim() ?? "");
+  const firstGlyph = glyphs[0] ?? "☆";
+
+  // Step 1: convert symbol → name (default to star)
+  const rarityName = raritySymbolToName[firstGlyph] || "star";
+  console.log(rarityName);
+
+  // Step 2: convert name → image path
+  const src = rarityImages[rarityName];
+  console.log(src);
+
+  return (
+    <div className="flex w-full">
+      {glyphs.map((_, i) => (
+        <Image
+          key={i}
+          src={src}
+          width={width}
+          height={height}
+          alt={`${name} - ${rarityName}`}
+          aria-hidden="true"
+        />
+      ))}
+    </div>
+  );
+}

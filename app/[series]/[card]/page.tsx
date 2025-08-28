@@ -1,6 +1,7 @@
 // app/[series]/[card]/page.tsx
 
 import BackButton from "@/app/components/BackButton";
+import { RarityIcons } from "@/app/filterUI";
 import { pokemonDB } from "@/app/lib/pokemonDB";
 import { fetchCard } from "@/app/lib/pokemonStore";
 import Image from "next/image";
@@ -44,7 +45,7 @@ export default async function CardPage({ params }: PageProps) {
   };
 
   const finalPacks = fetchFinalPacks();
-  console.log("final pack", finalPacks);
+
   return (
     <main className="md:flex md:justify-center md:items-center md:pt-8 relative pt-10">
       <div className=" top-0 left-1 absolute">
@@ -61,21 +62,48 @@ export default async function CardPage({ params }: PageProps) {
       </div>
       <div className="md:px-8 md:flex md:flex-col md:justify-center">
         <div>
-          <h1 className="font-bold p-2 text-center md:text-3xl md:pb-6">
-            From pack&#40;s&#41;
+          <h1 className="font-bold p-2 text-center text-3xl md:text-4xl md:pb-6 md:pt-2 pt-6">
+            {/* From pack&#40;s&#41; */}
+            Card information:
           </h1>
         </div>
-        <div className="flex justify-center gap-4 items-center">
-          {finalPacks.map((fp) => (
-            <Image
-              key={fp.name}
-              src={fp.src}
-              alt={fp.name}
-              width={44}
-              height={77}
-              className="rounded-lg md:w-[80px]"
-            />
-          ))}
+        <div>
+          <div
+            className="flex  gap-4 items-center justify-between
+          "
+          >
+            <p className="font-medium p-2 text-center md:text-3xl md:pb-6">
+              From pack&#40;s&#41;:
+            </p>
+            {finalPacks.map((fp) => (
+              <Image
+                key={fp.name}
+                src={fp.src}
+                alt={fp.name}
+                width={44}
+                height={77}
+                className="rounded-lg md:w-[80px]"
+              />
+            ))}
+          </div>
+          <div className="flex font-bold p-2 text-center md:text-3xl md:pb-6  justify-between">
+            <p className="font-medium">Id: </p>
+            <p>{item.id}</p>
+          </div>
+          <div className="flex  justify-between font-bold p-2 text-center md:text-3xl md:pb-6">
+            <p className="font-medium">Name: </p>
+            <p>{item.name}</p>
+          </div>
+          <div className="font-bold  justify-between p-2 text-center md:text-3xl md:pb-6 flex items-center">
+            <p className="font-medium">Rarity: </p>
+            <p>
+              <RarityIcons name={item.name} rarity={item.rarity} />
+            </p>
+          </div>
+          <div className="flex  justify-between font-bold p-2 text-center md:text-3xl md:pb-6">
+            <p className="font-medium">Type:</p>
+            <p>{item.type}</p>
+          </div>
         </div>
       </div>
     </main>

@@ -152,6 +152,7 @@ const SideFilter = ({
 
         {/* shining */}
         <Link href={hrefForFilters({ rarity: "✵" })} onClick={onSelect}>
+        
           <FilterRarity
             src="/rarity/shiny.webp"
             count={1}
