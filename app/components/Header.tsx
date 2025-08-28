@@ -61,7 +61,7 @@ export default function Header() {
       </Link>
 
       <div className="flex gap-2 items-center">
-        <div ref={containerRef} className="relative">
+        {/* <div ref={containerRef} className="relative">
           <div className="relative w-full max-w-sm">
             <input
               type="search"
@@ -94,7 +94,7 @@ export default function Header() {
               {filterResult.map((f) => (
                 <li
                   key={f.id}
-                  className="flex justify-between px-2 py-3 items-center"
+                  className="flex justify-between px-2 py-3 items-center cursor-pointer"
                 >
                   <p>{f.name} </p>
                   <Image src={f.image} alt={f.name} width={50} height={50} />
@@ -102,7 +102,7 @@ export default function Header() {
               ))}
             </ul>
           )}
-        </div>
+        </div> */}
 
         {/* <button
           className="p-2 bg-white hover:bg-white cursor-pointer rounded-2xl"

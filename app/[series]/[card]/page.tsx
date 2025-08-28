@@ -11,47 +11,62 @@ type PageProps = {
   params: Promise<{ series: string; card: string }>;
 };
 
+type Pack = { name: string; src: string };
+
+// Normalize text for safe comparisons (case/accents/punctuation)
+const norm = (s = "") =>
+  s
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]/g, "");
+
+// Decide how to show the “pack”: image if it matches a known pack of the series,
+// otherwise fall back to showing plain text (e.g., “Missions”, “Wonder Pick”).
+function resolvePackDisplay(packNameRaw: string, packsOfSeries: Pack[]) {
+  const packName = packNameRaw?.trim() ?? "";
+  const target = norm(packName);
+
+  if (!target) return { images: [] as Pack[], text: "—" };
+
+  // special rule: “shared” -> show all packs of this series
+  if (target.includes("shared")) return { images: packsOfSeries, text: "" };
+
+  // build index of packs for fast lookup
+  const index = new Map<string, Pack>(
+    packsOfSeries.map((p) => [norm(p.name), p])
+  );
+  const hit = index.get(target);
+
+  // if we found a matching pack image, render it; else, show the label as text
+  return hit
+    ? { images: [hit], text: "" }
+    : { images: [] as Pack[], text: packName };
+}
+
 export default async function CardPage({ params }: PageProps) {
   const { series, card } = await params;
   const seriesId = series.toLowerCase();
 
-  console.log(seriesId);
-
-  const item = await fetchCard(seriesId, card); // O(1) Map lookup
+  const item = await fetchCard(seriesId, card); // O(1) Map lookup in your store
   if (!item) return notFound();
 
-  const fetchPacksOfSeries = () => {
-    const serie = pokemonDB.find(
-      (s) => s.id.toLowerCase() === seriesId.toLowerCase()
-    );
-    return serie?.packs ?? [];
-  };
+  const packsOfSeries: Pack[] =
+    pokemonDB.find((s) => s.id.toLowerCase() === seriesId)?.packs ?? [];
 
-  const norm = (s = "") =>
-    s
-      .toLowerCase() // 1) ignore case differences
-      .normalize("NFKD") // 2) split letters and accents (Unicode)
-      .replace(/[\u0300-\u036f]/g, "") // 3) drop the accent marks
-      .replace(/[^a-z0-9]/g, ""); // 4) remove everything not a–z or 0–9
-
-  const fetchFinalPacks = () => {
-    const packsOfSeries = fetchPacksOfSeries();
-    const packName = item.pack ?? "";
-    const isShared = norm(packName).includes("shared");
-    if (isShared) return packsOfSeries;
-
-    const target = norm(packName);
-    return packsOfSeries.filter((p) => norm(p.name) === target);
-  };
-
-  const finalPacks = fetchFinalPacks();
+  const { images: packImages, text: packText } = resolvePackDisplay(
+    item.pack ?? "",
+    packsOfSeries
+  );
 
   return (
-    <main className="md:flex md:justify-center md:items-center md:pt-8 relative pt-10">
-      <div className=" top-0 left-1 absolute">
+    <main className="relative pt-10 md:flex md:items-center md:justify-center md:pt-8">
+      <div className="absolute left-1 top-0">
         <BackButton />
       </div>
-      <div className="flex justify-center items-center">
+
+      {/* LEFT: card image */}
+      <div className="flex items-center justify-center">
         <Image
           src={item.image}
           alt={item.name}
@@ -60,47 +75,64 @@ export default async function CardPage({ params }: PageProps) {
           className="aspect-[7/10] rounded-lg md:w-[400px]"
         />
       </div>
-      <div className="md:px-8 md:flex md:flex-col md:justify-center">
+
+      {/* RIGHT: info */}
+      <div className="md:flex md:flex-col md:justify-center md:px-8">
         <div>
-          <h1 className="font-bold p-2 text-center text-3xl md:text-4xl md:pb-6 md:pt-2 pt-6">
-            {/* From pack&#40;s&#41; */}
+          <h1 className="py-8  text-center text-3xl font-bold md:pb-6 md:pt-2 md:text-4xl">
             Card information:
           </h1>
         </div>
+
         <div>
-          <div
-            className="flex  gap-4 items-center justify-between
-          "
-          >
-            <p className="font-medium p-2 text-center md:text-3xl md:pb-6">
-              From pack&#40;s&#41;:
+          {/* From pack(s) */}
+          <div className="flex items-center justify-between gap-4">
+            <p className="p-2 text-center font-medium md:pb-6 md:text-3xl">
+              From pack(s):
             </p>
-            {finalPacks.map((fp) => (
-              <Image
-                key={fp.name}
-                src={fp.src}
-                alt={fp.name}
-                width={44}
-                height={77}
-                className="rounded-lg md:w-[80px]"
-              />
-            ))}
+
+            {packImages.length > 0 ? (
+              <div className="flex gap-2">
+                {packImages.map((fp) => (
+                  <Image
+                    key={fp.name}
+                    src={fp.src}
+                    alt={fp.name}
+                    width={44}
+                    height={77}
+                    className="rounded-lg md:w-[80px]"
+                  />
+                ))}
+              </div>
+            ) : (
+              <span className=" flex justify-between p-2 text-center font-bold md:pb-6 md:text-3xl">
+                {packText || "—"}
+              </span>
+            )}
           </div>
-          <div className="flex font-bold p-2 text-center md:text-3xl md:pb-6  justify-between">
+
+          {/* ID */}
+          <div className="flex justify-between p-2 text-center font-bold md:pb-6 md:text-3xl">
             <p className="font-medium">Id: </p>
             <p>{item.id}</p>
           </div>
-          <div className="flex  justify-between font-bold p-2 text-center md:text-3xl md:pb-6">
+
+          {/* Name */}
+          <div className="flex justify-between p-2 text-center font-bold md:pb-6 md:text-3xl">
             <p className="font-medium">Name: </p>
             <p>{item.name}</p>
           </div>
-          <div className="font-bold  justify-between p-2 text-center md:text-3xl md:pb-6 flex items-center">
+
+          {/* Rarity */}
+          <div className="flex items-center justify-between p-2 text-center font-bold md:pb-6 md:text-3xl">
             <p className="font-medium">Rarity: </p>
             <div>
               <RarityIcons name={item.name} rarity={item.rarity} />
             </div>
           </div>
-          <div className="flex  justify-between font-bold p-2 text-center md:text-3xl md:pb-6">
+
+          {/* Type */}
+          <div className="flex justify-between p-2 text-center font-bold md:pb-6 md:text-3xl">
             <p className="font-medium">Type:</p>
             <p>{item.type}</p>
           </div>

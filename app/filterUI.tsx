@@ -55,6 +55,8 @@ export const raritySymbolToName: Record<string, string> = {
   "☆": "star",
 
   "✵": "shiny",
+
+  Promo: "promo",
 };
 
 type RarityIconsProps = {
@@ -69,7 +71,35 @@ export const rarityImages: Record<string, string> = {
   diamond: "/rarity/diamond.webp",
   shiny: "/rarity/shiny.webp",
   star: "/rarity/star.webp",
+  promo: "/rarity/promo.png",
 };
+
+function normalizeRarity(rarityRaw?: string | null): {
+  name: string;
+  count: number;
+} {
+  if (!rarityRaw) return { name: "star", count: 1 };
+
+  const trimmed = rarityRaw.trim();
+  if (!trimmed) return { name: "star", count: 1 };
+
+  // If it's already a word like "promo", "star", etc.
+  const asName = trimmed.toLowerCase();
+  const directNames: Record<string, string> = {
+    crown: "crown",
+    diamond: "diamond",
+    shiny: "shiny",
+    star: "star",
+    promo: "promo",
+  };
+  if (directNames[asName]) return { name: directNames[asName], count: 1 };
+
+  // Otherwise treat as symbols (e.g. "◊◊")
+  const glyphs = Array.from(trimmed);
+  const firstGlyph = glyphs[0];
+  const name = raritySymbolToName[firstGlyph] ?? "star";
+  return { name, count: glyphs.length };
+}
 
 export function RarityIcons({
   name,
@@ -77,20 +107,20 @@ export function RarityIcons({
   width = 20,
   height = 35,
 }: RarityIconsProps) {
-  const glyphs = Array.from(rarity?.trim() ?? "");
-  const firstGlyph = glyphs[0] ?? "☆";
+  const { name: rarityName, count } = normalizeRarity(rarity);
 
-  // Step 1: convert symbol → name (default to star)
-  const rarityName = raritySymbolToName[firstGlyph] || "star";
-  console.log(rarityName);
-
-  // Step 2: convert name → image path
+  if (rarityName === "promo") {
+    return (
+      <span className="select-none font-bold text-zinc-700 dark:text-zinc-300">
+        N/A
+      </span>
+    );
+  }
   const src = rarityImages[rarityName];
-  console.log(src);
 
   return (
     <div className="flex w-full">
-      {glyphs.map((_, i) => (
+      {Array.from({ length: count }).map((_, i) => (
         <Image
           key={i}
           src={src}
