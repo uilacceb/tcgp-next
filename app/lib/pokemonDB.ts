@@ -9,6 +9,12 @@ export type SeriesMeta = {
 
 export const pokemonDB: SeriesMeta[] = [
   {
+    id: "A4a",
+    name: "Secluded Springs",
+    logoURL: "/series/secluded-springs-series.webp",
+    packs: [{ name: "Secluded Springs", src: "/packs/secluded-springs.webp" }],
+  },
+  {
     id: "A4",
     name: "Wisdom of Sea and Sky",
     logoURL: "/series/wisdom-of-sea-and-sky-series.webp",
