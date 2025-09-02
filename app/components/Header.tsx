@@ -61,7 +61,7 @@ export default function Header() {
       </Link>
 
       <div className="flex gap-2 items-center">
-        {/* <div ref={containerRef} className="relative">
+        <div ref={containerRef} className="relative">
           <div className="relative w-full max-w-sm">
             <input
               type="search"
@@ -91,20 +91,29 @@ export default function Header() {
 
           {filterResult.length > 0 && dropDownOpen && (
             <ul className="absolute z-10 w-full p-2 max-h-120 overflow-auto bg-white rounded-2xl">
-              {filterResult.map((f) => (
-                <li
-                  key={f.id}
-                  className="flex justify-between px-2 py-3 items-center cursor-pointer"
-                >
-                  <p>{f.name} </p>
-                  <Image src={f.image} alt={f.name} width={50} height={50} />
-                </li>
-              ))}
+              {filterResult.map((f) => {
+                const serie = f.id.split("-")[0];
+                const formattedSeries =
+                  serie.charAt(0).toUpperCase() + serie.slice(1).toLowerCase();
+                return (
+                  <Link key={f.id} href={`/${formattedSeries}/${f.id}`}>
+                    <li className="flex justify-between px-2 py-3 items-center cursor-pointer">
+                      <p>{f.name}</p>
+                      <Image
+                        src={f.image}
+                        alt={f.name}
+                        width={50}
+                        height={50}
+                      />
+                    </li>
+                  </Link>
+                );
+              })}
             </ul>
           )}
-        </div> */}
-
-        {/* <button
+        </div>
+        {/* 
+        <button
           className="p-2 bg-white hover:bg-white cursor-pointer rounded-2xl"
           onClick={filterName}
         >
