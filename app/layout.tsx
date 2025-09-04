@@ -1,4 +1,3 @@
-// app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
@@ -6,6 +5,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { ThemeProvider } from "next-themes";
+import { SearchProvider } from "./context/SearchContext";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({
@@ -46,16 +46,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex min-h-screen flex-col`}
       >
-        {/* 3) Let next-themes manage the class after mount */}
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem={false}
-        >
-          <Header />
-          <main className="flex-1 p-2">{children}</main>
-          <Footer />
-        </ThemeProvider>
+        <SearchProvider>
+          {/* 3) Let next-themes manage the class after mount */}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem={false}
+          >
+            <Header />
+            <main className="flex-1 p-2">{children}</main>
+            <Footer />
+          </ThemeProvider>
+        </SearchProvider>
       </body>
     </html>
   );

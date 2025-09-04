@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import SideFilter from "../components/SideFilter";
 import MobileFilters from "../components/MobileFilters";
+import { SearchContext, useSearch } from "../context/SearchContext";
+import Link from "next/link";
+import Image from "next/image";
+import CardsClient from "../components/CardsClient";
 
 const FilteredCards = () => {
   return (
@@ -9,6 +13,8 @@ const FilteredCards = () => {
         <SideFilter />
         <MobileFilters />
       </div>
+
+      <CardsClient />
     </div>
   );
 };

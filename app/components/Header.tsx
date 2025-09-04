@@ -6,10 +6,11 @@ import React, { useEffect, useRef, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 import { fetchPokemons, Pokemon } from "../fetchPokemons";
 import { useRouter } from "next/navigation";
+import { useSearch } from "../context/SearchContext";
 
 export default function Header() {
+  const { filterResult, setFilterResult } = useSearch();
   const [pokemonName, setPokemonName] = useState<string>("");
-  const [filterResult, setFilterResult] = useState<Pokemon[]>([]);
   const [dropDownOpen, setDropDownOpen] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
