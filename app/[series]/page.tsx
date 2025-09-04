@@ -99,8 +99,7 @@ export default async function SeriesPage({ params, searchParams }: PageProps) {
                   height={200}
                   loading="lazy"
                   decoding="async"
-                  className="aspect-[7/10] md:w-[150px] lg:w-[200px] 
-                      relative z-[1]"
+                  className="aspect-[7/10] md:w-[150px] lg:w-[200px] relative z-[1]"
                 />
               </Link>
             </div>

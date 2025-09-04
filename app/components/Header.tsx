@@ -5,6 +5,7 @@ import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 import { fetchPokemons, Pokemon } from "../fetchPokemons";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const [pokemonName, setPokemonName] = useState<string>("");
@@ -14,6 +15,9 @@ export default function Header() {
   useEffect(() => {
     filterName();
   }, [pokemonName]);
+
+  const router = useRouter();
+
   const filterName = async () => {
     const allPokemon = await fetchPokemons();
     const filtered = allPokemon.filter((p) =>
@@ -45,6 +49,13 @@ export default function Header() {
     };
   }, []);
 
+  const submitSearch = () => {
+    const name = pokemonName.trim();
+    if (!name) return; // do nothing if empty
+    router.push(`/cards?name=${encodeURIComponent(name)}`); //{encodeURIComponent ensures that if a user types something like pikachu & mew, the URL will still work and Next.js will correctly receive q="pikachu & mew".
+    setDropDownOpen(false);
+  };
+
   return (
     <div
       className="flex items-center justify-between p-4 sticky top-0
@@ -73,7 +84,13 @@ export default function Header() {
                 setPokemonName(e.target.value);
                 setDropDownOpen(true);
               }}
-              onFocus={() => setDropDownOpen(true)}
+              onFocus={() => setDropDownOpen(false)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault(); // ✅ prevent form submit/page reload
+                  submitSearch(); // ✅ trigger your handler
+                }
+              }}
             />
             <button
               type="button"
@@ -85,18 +102,23 @@ export default function Header() {
                 alt="search icon"
                 width={18}
                 height={18}
+                onClick={submitSearch}
               />
             </button>
           </div>
 
           {filterResult.length > 0 && dropDownOpen && (
-            <ul className="absolute z-10 w-full p-2 max-h-120 overflow-auto bg-white rounded-2xl">
+            <ul className="absolute z-10 w-full p-2 max-h-120 overflow-auto bg-white text-black dark:bg-[#0d2f3f] dark:text-white rounded-2xl">
               {filterResult.map((f) => {
                 const serie = f.id.split("-")[0];
                 const formattedSeries =
                   serie.charAt(0).toUpperCase() + serie.slice(1).toLowerCase();
                 return (
-                  <Link key={f.id} href={`/${formattedSeries}/${f.id}`}>
+                  <Link
+                    onClick={() => setDropDownOpen(false)}
+                    key={f.id}
+                    href={`/${formattedSeries}/${f.id}`}
+                  >
                     <li className="flex justify-between px-2 py-3 items-center cursor-pointer">
                       <p>{f.name}</p>
                       <Image
