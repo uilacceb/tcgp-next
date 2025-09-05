@@ -13,6 +13,7 @@ export default function Header() {
   const [pokemonName, setPokemonName] = useState<string>("");
   const [dropDownOpen, setDropDownOpen] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     filterName();
@@ -21,14 +22,16 @@ export default function Header() {
   const router = useRouter();
 
   const filterName = async () => {
-    const q = pokemonName.trim().toLowerCase();
-    if (!q) {
+    const name = pokemonName.trim().toLowerCase();
+    if (!name) {
       // ⬅️ IMPORTANT
       setFilterResult([]); // keep context empty when no query
       return;
     }
     const allPokemon = await fetchPokemons();
-    const filtered = allPokemon.filter((p) => p.name.toLowerCase().includes(q));
+    const filtered = allPokemon.filter((p) =>
+      p.name.toLowerCase().includes(name)
+    );
     setFilterResult(filtered);
   };
 
@@ -85,6 +88,7 @@ export default function Header() {
         <div ref={containerRef} className="relative">
           <div className="relative w-full max-w-sm">
             <input
+              ref={inputRef}
               type="search"
               className="w-full border-2 border-gray-400 h-10 pr-10 pl-3 rounded-full
                bg-[#f1f1f1] text-zinc-900 dark:text-zinc-900"
@@ -98,8 +102,9 @@ export default function Header() {
               onFocus={() => setDropDownOpen(false)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                  e.preventDefault(); // ✅ prevent form submit/page reload
-                  submitSearch(); // ✅ trigger your handler
+                  e.preventDefault();
+                  submitSearch();
+                  inputRef.current?.blur(); //close keyboard
                 }
               }}
             />
