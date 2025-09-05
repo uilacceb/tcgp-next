@@ -13,6 +13,8 @@ export default function Header() {
   const [pokemonName, setPokemonName] = useState<string>("");
   const [dropDownOpen, setDropDownOpen] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  
   useEffect(() => {
     filterName();
   }, [pokemonName]);
