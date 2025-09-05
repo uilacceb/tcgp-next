@@ -6,25 +6,33 @@ import Image from "next/image";
 import { useSearch } from "@/app/context/SearchContext";
 import { cardIDFromCard } from "@/app/lib/pokemonStore";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 
 export default function CardsClient() {
-  const { filterResult } = useSearch();
-  const searchParams = useSearchParams();
-  const search = searchParams.get("name");
+  const { filterResult, userInput } = useSearch();
+  const search = useSearchParams().get("name");
+
+  const display = useMemo(() => {
+    if (!search) return []; // guarded on the server too
+    return filterResult.filter((p) => p.name.toLowerCase().includes(search));
+  }, [filterResult, search]);
+
+  const resultLength = display.length;
 
   return (
     <div className="px-6 py-8">
-      {filterResult.length === 0 ? (
+      {display.length === 0 ? (
         <p className="text-sm opacity-70">No results available.</p>
       ) : (
         <>
           <div>
             <h1 className="font-bold text-sm pb-4 md:text-2xl">
-              Found {filterResult.length} cards that includes &#39;{search}&#39;
+              Found {resultLength} cards that includes &#39;
+              {userInput || search}&#39;
             </h1>
           </div>
           <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-x-4 gap-y-6">
-            {filterResult.map((p) => {
+            {display.map((p) => {
               const serie = p.id.split("-")[0];
               const formattedSeries =
                 serie.charAt(0).toUpperCase() + serie.slice(1).toLowerCase();

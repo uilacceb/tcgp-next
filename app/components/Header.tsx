@@ -9,12 +9,11 @@ import { useRouter } from "next/navigation";
 import { useSearch } from "../context/SearchContext";
 
 export default function Header() {
-  const { filterResult, setFilterResult } = useSearch();
+  const { filterResult, setFilterResult, setUserInput } = useSearch();
   const [pokemonName, setPokemonName] = useState<string>("");
   const [dropDownOpen, setDropDownOpen] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  
   useEffect(() => {
     filterName();
   }, [pokemonName]);
@@ -22,11 +21,14 @@ export default function Header() {
   const router = useRouter();
 
   const filterName = async () => {
+    const q = pokemonName.trim().toLowerCase();
+    if (!q) {
+      // ⬅️ IMPORTANT
+      setFilterResult([]); // keep context empty when no query
+      return;
+    }
     const allPokemon = await fetchPokemons();
-    const filtered = allPokemon.filter((p) =>
-      p.name.toLowerCase().includes(pokemonName.toLowerCase())
-    );
-
+    const filtered = allPokemon.filter((p) => p.name.toLowerCase().includes(q));
     setFilterResult(filtered);
   };
 
@@ -59,6 +61,11 @@ export default function Header() {
     setDropDownOpen(false);
   };
 
+  useEffect(() => {
+    const id = setTimeout(filterName, 200); // debounce optional
+    return () => clearTimeout(id);
+  }, [pokemonName]);
+
   return (
     <div
       className="flex items-center justify-between p-4 sticky top-0
@@ -86,6 +93,7 @@ export default function Header() {
               onChange={(e) => {
                 setPokemonName(e.target.value);
                 setDropDownOpen(true);
+                setUserInput(e.target.value);
               }}
               onFocus={() => setDropDownOpen(false)}
               onKeyDown={(e) => {
