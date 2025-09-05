@@ -1,6 +1,4 @@
-import React from "react";
-import SideFilter from "../components/SideFilter";
-import MobileFilters from "../components/MobileFilters";
+import React, { Suspense } from "react";
 import CardsClient from "../components/CardsClient";
 
 const FilteredCards = () => {
@@ -10,8 +8,9 @@ const FilteredCards = () => {
         <SideFilter />
         <MobileFilters />
       </div> */}
-
-      <CardsClient />
+      <Suspense fallback={<div className="px-6 py-8">Loading…</div>}>
+        <CardsClient />
+      </Suspense>
     </div>
   );
 };
