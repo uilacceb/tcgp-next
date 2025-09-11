@@ -7,6 +7,7 @@ import ThemeToggle from "./ThemeToggle";
 import { fetchPokemons, Pokemon } from "../fetchPokemons";
 import { useRouter } from "next/navigation";
 import { useSearch } from "../context/SearchContext";
+import Chatbox from "./ChatBox";
 
 export default function Header() {
   const { filterResult, setFilterResult, setUserInput } = useSearch();
@@ -83,7 +84,7 @@ export default function Header() {
           className="cursor-pointer"
         />
       </Link>
-
+      <Chatbox />
       <div className="flex gap-2 items-center">
         <div ref={containerRef} className="relative">
           <div className="relative w-full max-w-sm">
