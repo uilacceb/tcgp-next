@@ -26,7 +26,7 @@ export default function MobileFilters() {
         aria-controls="mobile-filter"
         aria-expanded={open}
       >
-        <Image src="/icons/filter.png" alt="filter" width={40} height={40} />
+        <img src="/icons/filter.png" alt="filter" width={40} height={40} />
       </button>
 
       {/* Drawer + overlay */}

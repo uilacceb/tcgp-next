@@ -84,7 +84,7 @@ export default function CardsClient() {
                       href={href}
                       className="block group rounded-[5px] overflow-hidden"
                     >
-                      <Image
+                      <img
                         src={p.image}
                         alt={p.name}
                         width={140}

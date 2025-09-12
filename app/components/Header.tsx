@@ -76,7 +76,7 @@ export default function Header() {
                     bg-[#d3d9db] dark:bg-[#001c29] z-[1000]"
     >
       <Link href="/">
-        <Image
+        <img
           src="/icons/logo.png"
           alt="logo"
           width={100}
@@ -84,7 +84,6 @@ export default function Header() {
           className="cursor-pointer"
         />
       </Link>
-      <Chatbox />
       <div className="flex gap-2 items-center">
         <div ref={containerRef} className="relative">
           <div className="relative w-full max-w-sm">
@@ -114,7 +113,7 @@ export default function Header() {
               className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
               aria-label="Search"
             >
-              <Image
+              <img
                 src="/icons/search.png"
                 alt="search icon"
                 width={18}

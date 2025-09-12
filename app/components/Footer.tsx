@@ -13,7 +13,7 @@ const Footer = () => {
     <footer className="p-4 flex justify-center items-center">
       {/* Tablet/Desktop: always show full text */}
       <p className="hidden md:flex items-center gap-2 md:w-[70%] lg:w-[50%] p-2 leading-relaxed text-sm">
-        <Image
+        <img
           src="/icons/psyduck.png"
           alt="Psyduck logo"
           width={30}
@@ -25,7 +25,7 @@ const Footer = () => {
 
       {/* Mobile: one line + Read more toggle */}
       <div className="md:hidden flex items-center gap-2 w-full">
-        <Image
+        <img
           src="/icons/psyduck.png"
           alt="Psyduck logo"
           width={24}

@@ -67,7 +67,7 @@ export default async function CardPage({ params }: PageProps) {
 
       {/* LEFT: card image */}
       <div className="flex items-center justify-center">
-        <Image
+        <img
           src={item.image}
           alt={item.name}
           width={280}

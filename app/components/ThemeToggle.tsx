@@ -7,7 +7,7 @@ export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <Image
+    <img
       src="/icons/theme.png"
       alt="theme toggle"
       width={40}

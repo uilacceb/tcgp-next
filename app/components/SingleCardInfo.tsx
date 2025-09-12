@@ -18,15 +18,11 @@ export default function SingleCardInfo({
   unoptimized = false,
 }: Props) {
   return (
-    <Image
+    <img
       src={src}
       alt={alt}
       width={width}
       height={height}
-      unoptimized={unoptimized}
-      loading="lazy"
-      decoding="async"
-      // placeholder="empty"      // ensure you’re not using blurDataURL (extra work)
       className="aspect-[7/10] md:w-[150px] lg:w-[200px] 
                       relative z-[1]"
     />

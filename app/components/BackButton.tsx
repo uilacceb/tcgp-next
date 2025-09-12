@@ -11,7 +11,7 @@ const BackButton = ({ href }: { href?: string }) => {
       onClick={() => (href ? router.replace(href) : router.back())}
       className="px-3 py-1 rounded flex cursor-pointer"
     >
-      <Image
+      <img
         src="/icons/return.png"
         alt="back arrow logo"
         height={20}

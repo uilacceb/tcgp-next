@@ -76,7 +76,7 @@ const SideFilter = ({
               onClick={onSelect}
             >
               <div className="flex flex-col items-center gap-1 justify-end cursor-pointer jump-on-hover">
-                <Image
+                <img
                   src={src}
                   alt={`${name} - pack`}
                   width={40}
@@ -93,7 +93,7 @@ const SideFilter = ({
               key="Shared"
             >
               <div className="flex flex-col items-center gap-1 justify-end cursor-pointer">
-                <Image
+                <img
                   src="/packs/shared.png"
                   alt="Shared - pack"
                   width={40}
