@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import CardsClient from "../components/CardsClient";
 import SearchInputBox from "../components/SearchInputBox";
+import ChatWithMeIcon from "../components/ChatWithMeIcon";
 
 const FilteredCards = () => {
   return (
@@ -10,7 +11,10 @@ const FilteredCards = () => {
         <MobileFilters />
       </div> */}
       <Suspense fallback={<div className="px-6 py-8">Loading…</div>}>
-        <SearchInputBox />
+        <div className="flex justify-between">
+          <SearchInputBox />
+          <ChatWithMeIcon />
+        </div>
         <CardsClient />
       </Suspense>
     </div>

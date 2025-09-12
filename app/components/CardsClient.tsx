@@ -2,18 +2,22 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useMemo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearch } from "@/app/context/SearchContext";
 import { cardIDFromCard } from "@/app/lib/pokemonStore";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function CardsClient() {
-  const { filterResult, userInput } = useSearch();
+  const { filterResult, userInput, setFilterResult } = useSearch();
   const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();
 
   const [timedOut, setTimedOut] = useState<boolean>(false);
+
+  useEffect(() => {
+    setFilterResult([]);
+  }, []);
 
   useEffect(() => {
     if (!!userInput?.trim() && filterResult.length === 0) {
