@@ -84,79 +84,18 @@ export default function Header() {
           className="cursor-pointer"
         />
       </Link>
-      <div className="flex gap-2 items-center">
-        <div ref={containerRef} className="relative">
-          <div className="relative w-full max-w-sm">
-            <input
-              ref={inputRef}
-              type="search"
-              className="w-full border-2 border-gray-400 h-10 pr-10 pl-3 rounded-full
-               bg-[#f1f1f1] text-zinc-900 dark:text-zinc-900"
-              placeholder="Search pokemon"
-              value={pokemonName}
-              onChange={(e) => {
-                setPokemonName(e.target.value);
-                setDropDownOpen(true);
-                setUserInput(e.target.value);
-              }}
-              onFocus={() => setDropDownOpen(false)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  submitSearch();
-                  inputRef.current?.blur(); //close keyboard
-                }
-              }}
-            />
-            <button
-              type="button"
-              className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
-              aria-label="Search"
-            >
-              <img
-                src="/icons/search.png"
-                alt="search icon"
-                width={18}
-                height={18}
-                onClick={submitSearch}
-              />
-            </button>
-          </div>
+      <div className="flex items-center gap-3">
+        <Link href="/cards">
+          <img
+            src="/icons/search.png"
+            alt="search icon"
+            width={30}
+            height={30}
+            onClick={submitSearch}
+            className="cursor-pointer dark:opacity-90"
+          />
+        </Link>
 
-          {filterResult.length > 0 && dropDownOpen && (
-            <ul className="absolute z-10 w-full p-2 max-h-120 overflow-auto bg-white text-black dark:bg-[#0d2f3f] dark:text-white rounded-2xl">
-              {filterResult.map((f) => {
-                const serie = f.id.split("-")[0];
-                const formattedSeries =
-                  serie.charAt(0).toUpperCase() + serie.slice(1).toLowerCase();
-                return (
-                  <Link
-                    onClick={() => setDropDownOpen(false)}
-                    key={f.id}
-                    href={`/${formattedSeries}/${f.id}`}
-                  >
-                    <li className="flex justify-between px-2 py-3 items-center cursor-pointer">
-                      <p>{f.name}</p>
-                      <Image
-                        src={f.image}
-                        alt={f.name}
-                        width={50}
-                        height={50}
-                      />
-                    </li>
-                  </Link>
-                );
-              })}
-            </ul>
-          )}
-        </div>
-        {/* 
-        <button
-          className="p-2 bg-white hover:bg-white cursor-pointer rounded-2xl"
-          onClick={filterName}
-        >
-          Show all
-        </button> */}
         <ThemeToggle />
       </div>
     </div>
