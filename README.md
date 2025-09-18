@@ -3,7 +3,7 @@
 **TCGP Database** is an interactive Pokémon TCG app that lets users search, filter, and explore cards with ease. With name-based search, powerful filters (rarity, packs, types), and an AI-assisted chat that understands natural language descriptions, collectors can quickly discover the cards they want.
 
 ## Try it yourself
-https://your-tcgp-database-app-link.vercel.app/
+https://tcgp-database.vercel.app/
 
 ## Features
 
