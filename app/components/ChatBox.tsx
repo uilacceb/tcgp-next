@@ -1,6 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { useSearch } from "../context/SearchContext";
+import { useRouter } from "next/navigation";
 
 // Define the type for a single chat message
 interface Message {
@@ -9,10 +12,13 @@ interface Message {
 }
 
 export default function Chatbox() {
+  const { setUserInput } = useSearch();
   const [input, setInput] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const router = useRouter();
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -69,7 +75,18 @@ export default function Chatbox() {
             <div key={index} className="flex-col flex">
               {msg.role === "bot" ? (
                 <p className="bg-gray-200 text-[#86A695] dark:text-[#0d2f3f] font-bold p-3 rounded-xl self-start max-w-[80%] mb-2">
-                  {msg.text}
+                  {msg.text?.split(" ").map((r) => (
+                    <button
+                      className="cursor-pointer"
+                      key={r}
+                      onClick={() => {
+                        // setUserInput(r.toLowerCase());
+                        router.push(`/cards?name=${r.toLowerCase()}`);
+                      }}
+                    >
+                      {r}
+                    </button>
+                  ))}
                 </p>
               ) : (
                 <p className="bg-[#86A695] text-white font-bold p-3 rounded-xl self-end max-w-[80%] mb-2 dark:bg-[#0d2f3f]">

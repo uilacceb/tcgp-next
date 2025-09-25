@@ -20,7 +20,7 @@ export async function POST(req: Request) {
 
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-    const prompt = `You are a helpful assistant for a TCG Pocket database. Your ONLY purpose is to answer questions about Pokémon. You must not answer questions about any other topic. The User will describe a pokemon and you have to show all the results that matches the pokemon that user describes. Just shows the list of pokemon names that matches users' description.
+    const prompt = `You are a helpful assistant for a TCG Pocket database. Your ONLY purpose is to answer questions about Pokémon. You must not answer questions about any other topic. The User will describe a pokemon and you have to show all the results that matches the pokemon that user describes. Shows ONLY the list of pokemon names that matches users' description, separate them with a space"
 
 
 

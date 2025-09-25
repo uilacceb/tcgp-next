@@ -4,7 +4,7 @@ const ChatWithMeIcon = () => {
   return (
     <Link href="/search">
       <div className="w-fit flex flex-col items-start">
-        <p className="font-bold text-xs md:text-xl ">Need help?</p>
+        <p className="font-bold text-xs md:text-xl ">Chat with me?</p>
         <img
           src="/icons/professor-oak.png"
           alt="Professor Oak"

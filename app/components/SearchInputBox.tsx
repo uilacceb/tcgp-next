@@ -4,18 +4,29 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { fetchPokemons, Pokemon } from "../fetchPokemons";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useSearch } from "../context/SearchContext";
 
 export default function SearchInputBox() {
-  const { filterResult, setFilterResult, setUserInput } = useSearch();
+  const { filterResult, setFilterResult, setUserInput, userInput } =
+    useSearch();
   const [pokemonName, setPokemonName] = useState<string>("");
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const params = useSearchParams();
 
   useEffect(() => {
     filterName();
-  }, [pokemonName]);
+  }, [userInput]);
+
+  // 1) read ?name=... on first render
+  useEffect(() => {
+    const initial = (params.get("name") ?? "").trim();
+    if (initial) {
+      setPokemonName(initial);
+      setUserInput(initial);
+    }
+  }, [params, setUserInput]);
 
   const router = useRouter();
 
@@ -61,6 +72,12 @@ export default function SearchInputBox() {
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   e.preventDefault();
+                  router.replace(
+                    `/cards?name=${encodeURIComponent(
+                      userInput.toLowerCase()
+                    )}`,
+                    { scroll: false }
+                  );
                   inputRef.current?.blur(); //close keyboard
                 }
               }}

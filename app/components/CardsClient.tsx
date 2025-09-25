@@ -6,18 +6,19 @@ import { useEffect, useState } from "react";
 import { useSearch } from "@/app/context/SearchContext";
 import { cardIDFromCard } from "@/app/lib/pokemonStore";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-
+import { fetchPokemons } from "../fetchPokemons";
 export default function CardsClient() {
-  const { filterResult, userInput, setFilterResult } = useSearch();
+  const { filterResult, userInput, setFilterResult, setUserInput } =
+    useSearch();
   const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();
 
   const [timedOut, setTimedOut] = useState<boolean>(false);
 
-  useEffect(() => {
-    setFilterResult([]);
-  }, []);
+  // useEffect(() => {
+  //   setFilterResult([]);
+  // }, []);
 
   useEffect(() => {
     if (!!userInput?.trim() && filterResult.length === 0) {
@@ -30,22 +31,31 @@ export default function CardsClient() {
     }
   }, [userInput, filterResult.length]);
 
-  // Keep the URL in sync with the live user input while on /cards
+  // 2) On mount (and when URL changes), load results for ?name=
   useEffect(() => {
-    if (pathname !== "/cards") return;
+    const q = (params.get("name") ?? "").trim().toLowerCase();
 
-    const q = (userInput ?? "").trim();
-    const current = (params.get("name") ?? "").trim();
-
-    // if (!q) {
-    //   router.replace("/", { scroll: false });
-    //   return;
-    // }
-
-    if (q !== current) {
-      router.replace(`/cards?name=${encodeURIComponent(q)}`, { scroll: false });
+    if (!q) {
+      setUserInput("");
+      setFilterResult([]);
+      return;
     }
-  }, [userInput, pathname, params, router]);
+
+    setUserInput(q);
+
+    let cancelled = false;
+    (async () => {
+      const all = await fetchPokemons();
+      if (cancelled) return;
+      const filtered = all.filter((p) => p.name.toLowerCase().includes(q));
+      setFilterResult(filtered);
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [params, setUserInput, setFilterResult]);
+
 
   //when there is an input but results haven't arrived yet,
   const q = (userInput ?? "").trim();
@@ -64,7 +74,8 @@ export default function CardsClient() {
         <>
           <div>
             <h1 className="font-bold text-sm pb-4 md:text-2xl">
-              Found {count} cards that include &#39;{userInput}&#39;
+              Found {count} cards that include &#39;{userInput.toLowerCase()}
+              &#39;
             </h1>
           </div>
 
