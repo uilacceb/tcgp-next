@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Overview
 
-## Getting Started
+**TCGP Database** is an interactive Pokémon TCG app that lets users search, filter, and explore cards with ease. With name-based search, powerful filters (rarity, packs, types), and an AI-assisted chat that understands natural language descriptions, collectors can quickly discover the cards they want.
 
-First, run the development server:
+## Try it yourself
+https://tcgp-database.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### User-Friendly Search
+- **Search by Pokémon Name**: Quickly find cards by typing a Pokémon’s name.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### AI-Powered Chat
+- **Describe & Discover (Gemini API)**: Tell the chat what you’re looking for (e.g., “dark-type with claws”) and get relevant card suggestions.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Advanced Filtering
+- **Filter by Rarity, Packs, and Types**: Narrow results to exactly what you need.
 
-## Learn More
+### Card Browsing
+- Responsive grid layout with quick card previews
+- Detail view with key info and metadata
 
-To learn more about Next.js, take a look at the following resources:
+## Technologies Used
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- React
+- Next.js
+- TailwindCSS
+- Gemini API
+- Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Usage
 
-## Deploy on Vercel
+### Searching Cards
+1. Click on search button in the header.
+2. Enter a Pokémon name in the search bar.
+3. Browse the matching cards in the results grid.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Using the AI Chat
+1. Click on search button in the header.
+2. Click on Professor Oak
+3. Describe the card/Pokémon you have in mind (traits, type, appearance).
+4. Receive a curated list of relevant cards.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Filtering
+1. Open the the filter menu (mobile view)
+2. Select **Rarity**, **Packs**, and **Types** as needed.
+3. Results update instantly to match your criteria.
+
+## Author
+
+Created by Rebecca — feel free to contact me!
