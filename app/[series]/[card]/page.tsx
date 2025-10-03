@@ -1,8 +1,9 @@
 // app/[series]/[card]/page.tsx
 
 import BackButton from "@/app/components/BackButton";
+import CardVideo from "@/app/components/CardVideos";
 import { RarityIcons } from "@/app/filterUI";
-import { pokemonDB } from "@/app/lib/pokemonDB";
+import { pokemonDB, videoCard } from "@/app/lib/pokemonDB";
 import { fetchCard } from "@/app/lib/pokemonStore";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -58,6 +59,7 @@ export default async function CardPage({ params }: PageProps) {
     item.pack ?? "",
     packsOfSeries
   );
+  const video = videoCard.find((v) => v.id === card);
 
   return (
     <main className="relative pt-10 md:flex md:items-center md:justify-center md:pt-8">
@@ -67,13 +69,15 @@ export default async function CardPage({ params }: PageProps) {
 
       {/* LEFT: card image */}
       <div className="flex items-center justify-center">
-        <img
-          src={item.image}
-          alt={item.name}
-          width={280}
-          height={380}
-          className="aspect-[7/10] rounded-lg md:w-[400px]"
-        />
+        <CardVideo videoUrl={video?.url} className="md:w-[400px]">
+          <img
+            src={item.image}
+            alt={item.name}
+            width={280}
+            height={380}
+            className="aspect-[7/10] rounded-lg md:w-[400px]"
+          />
+        </CardVideo>
       </div>
 
       {/* RIGHT: info */}

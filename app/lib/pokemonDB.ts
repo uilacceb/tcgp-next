@@ -7,6 +7,11 @@ export type SeriesMeta = {
   packs: PackMeta[]; // 0..n packs
 };
 
+export type VideosMeta = {
+  id: string;
+  url: string;
+};
+
 export const pokemonDB: SeriesMeta[] = [
   {
     id: "A4b",
@@ -106,3 +111,70 @@ export const pokemonDB: SeriesMeta[] = [
 //   seriesDb.find(s => s.id.toLowerCase() === id.toLowerCase());
 // export const getPacksForSeries = (id: string) =>
 //   getSeriesById(id)?.packs ?? [];
+
+export const videoCard: VideosMeta[] = [
+  {
+    id: "a1-280",
+    url: "/videos/charizard-video.mp4",
+  },
+  {
+    id: "a1-281",
+    url: "/videos/pikachu-video.mp4",
+  },
+  {
+    id: "a1-282",
+    url: "/videos/mewtwo-video.mp4",
+  },
+  {
+    id: "a1-283",
+    url: "/videos/mew-video.mp4",
+  },
+  {
+    id: "a1a-085",
+    url: "/videos/celebi-video.mp4",
+  },
+  {
+    id: "a2-204",
+    url: "/videos/palkia-video.mp4",
+  },
+  {
+    id: "a2-205",
+    url: "/videos/dialga-video.mp4",
+  },
+  {
+    id: "a2a-095",
+    url: "/videos/arceus-video.mp4",
+  },
+  {
+    id: "a2b-096",
+    url: "/videos/giratina-video.mp4",
+  },
+  {
+    id: "a3-208",
+    url: "/videos/guzma-video.mp4",
+  },
+  {
+    id: "a3-209",
+    url: "/videos/lillie-video.mp4",
+  },
+  {
+    id: "a3a-088",
+    url: "/videos/buzzwole-video.mp4",
+  },
+  {
+    id: "a3b-092",
+    url: "/videos/eevee-video.mp4",
+  },
+  {
+    id: "a4-210",
+    url: "/videos/ho-Oh-video.mp4",
+  },
+  {
+    id: "a4-211",
+    url: "/videos/lugia-video.mp4",
+  },
+  {
+    id: "a4a-090",
+    url: "/videos/suicune-video.mp4",
+  },
+];
