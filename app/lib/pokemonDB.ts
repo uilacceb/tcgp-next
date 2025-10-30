@@ -14,6 +14,16 @@ export type VideosMeta = {
 
 export const pokemonDB: SeriesMeta[] = [
   {
+    id: "B1",
+    name: "Mega Rising",
+    logoURL: "/series/mega-rising.png",
+    packs: [
+      { name: "Mega Altaria", src: "/packs/altaria.png" },
+      { name: "Mega Blaziken", src: "/packs/blaziken.png" },
+      { name: "Mega Gyarados", src: "/packs/gyarados.png" },
+    ],
+  },
+  {
     id: "A4b",
     name: "Deluxe Pack: ex",
     logoURL: "/series/deluxe-pack-ex-series.png",
@@ -103,6 +113,12 @@ export const pokemonDB: SeriesMeta[] = [
     logoURL: "/series/promo-A-series.webp",
     packs: [{ name: "Promo-A", src: "/series/promo-A-series.webp" }],
   },
+  {
+    id: "PB",
+    name: "Promo-B",
+    logoURL: "/series/promo-B-series.png",
+    packs: [{ name: "Promo-B", src: "/series/promo-B-series.png" }],
+  },
 ];
 
 // Helpers
@@ -176,5 +192,17 @@ export const videoCard: VideosMeta[] = [
   {
     id: "a4a-090",
     url: "/videos/suicune-video.mp4",
+  },
+  {
+    id: "b1-284",
+    url: "/videos/blaziken-video.mp4",
+  },
+  {
+    id: "b1-285",
+    url: "/videos/gyarados-video.mp4",
+  },
+  {
+    id: "b1-286",
+    url: "/videos/altaria-video.mp4",
   },
 ];
