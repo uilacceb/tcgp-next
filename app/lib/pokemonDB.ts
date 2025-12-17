@@ -1,6 +1,7 @@
 // lib/pokemonDB.ts
 export type PackMeta = { name: string; src: string };
 export type SeriesMeta = {
+  series: string;
   id: string; // e.g. "A4"
   name: string; // display name
   logoURL: string;
@@ -12,8 +13,24 @@ export type VideosMeta = {
   url: string;
 };
 
+export const seriesName = {
+  A: "Series A",
+  B: "Series B",
+  Promo: "Promo",
+};
+
 export const pokemonDB: SeriesMeta[] = [
+   {
+    series: seriesName.B,
+    id: "B1a",
+    name: "Crimson Blaze",
+    logoURL: "/series/crimson-blaze-series.webp",
+    packs: [
+      { name: "Crimson Blaze", src: "/packs/crimson_blaze.png" }
+    ],
+  },
   {
+    series: seriesName.B,
     id: "B1",
     name: "Mega Rising",
     logoURL: "/series/mega-rising.png",
@@ -24,18 +41,21 @@ export const pokemonDB: SeriesMeta[] = [
     ],
   },
   {
+    series: seriesName.A,
     id: "A4b",
     name: "Deluxe Pack: ex",
     logoURL: "/series/deluxe-pack-ex-series.png",
     packs: [{ name: "Deluxe Pack", src: "/packs/deluxe-pack.png" }],
   },
   {
+    series: seriesName.A,
     id: "A4a",
     name: "Secluded Springs",
     logoURL: "/series/secluded-springs-series.webp",
     packs: [{ name: "Secluded Springs", src: "/packs/secluded-springs.webp" }],
   },
   {
+    series: seriesName.A,
     id: "A4",
     name: "Wisdom of Sea and Sky",
     logoURL: "/series/wisdom-of-sea-and-sky-series.webp",
@@ -45,12 +65,14 @@ export const pokemonDB: SeriesMeta[] = [
     ],
   },
   {
+    series: seriesName.A,
     id: "A3b",
     name: "Eevee Grove",
     logoURL: "/series/eevee-grove-series.webp",
     packs: [{ name: "Eevee Grove", src: "/packs/eevee-grove.webp" }],
   },
   {
+    series: seriesName.A,
     id: "A3a",
     name: "Extra Dimensional Crisis",
     logoURL: "/series/extra-Dimensional-Crisis-series.webp",
@@ -62,6 +84,7 @@ export const pokemonDB: SeriesMeta[] = [
     ],
   },
   {
+    series: seriesName.A,
     id: "A3",
     name: "Celestial Guardians",
     logoURL: "/series/celestial-guardians-series.webp",
@@ -71,18 +94,21 @@ export const pokemonDB: SeriesMeta[] = [
     ],
   },
   {
+    series: seriesName.A,
     id: "A2b",
     name: "Shining Revelry",
     logoURL: "/series/shining-revelry-series.webp",
     packs: [{ name: "Shining Revelry", src: "/packs/shining-revelry.webp" }],
   },
   {
+    series: seriesName.A,
     id: "A2a",
     name: "Triumphant Light",
     logoURL: "/series/triumphant-light-series.webp",
     packs: [{ name: "Arceus", src: "/packs/triumphant-light.webp" }],
   },
   {
+    series: seriesName.A,
     id: "A2",
     name: "Space-Time Smackdown",
     logoURL: "/series/space-time-smack-down-series.webp",
@@ -92,12 +118,14 @@ export const pokemonDB: SeriesMeta[] = [
     ],
   },
   {
+    series: seriesName.A,
     id: "A1a",
     name: "Mythical Island",
     logoURL: "/series/mythical-island-series.webp",
     packs: [{ name: "Mythical Island", src: "/packs/mew.webp" }],
   },
   {
+    series: seriesName.A,
     id: "A1",
     name: "Genetic Apex",
     logoURL: "/series/genetic-apex-series.webp",
@@ -108,12 +136,14 @@ export const pokemonDB: SeriesMeta[] = [
     ],
   },
   {
+    series: seriesName.Promo,
     id: "PA",
     name: "Promo-A",
     logoURL: "/series/promo-A-series.webp",
     packs: [{ name: "Promo-A", src: "/series/promo-A-series.webp" }],
   },
   {
+    series: seriesName.Promo,
     id: "PB",
     name: "Promo-B",
     logoURL: "/series/promo-B-series.png",
@@ -204,5 +234,9 @@ export const videoCard: VideosMeta[] = [
   {
     id: "b1-286",
     url: "/videos/altaria-video.mp4",
+  },
+  {
+    id: "b1a-087",
+    url: "/videos/crimson-blaze-video.mp4",
   },
 ];
