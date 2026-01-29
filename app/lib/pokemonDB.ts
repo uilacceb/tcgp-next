@@ -22,6 +22,15 @@ export const seriesName = {
 export const pokemonDB: SeriesMeta[] = [
    {
     series: seriesName.B,
+    id: "B2",
+    name: "Fantastical Parade",
+    logoURL: "/series/fantastical-parade.png",
+    packs: [
+      { name: "Fantastical Parade", src: "/packs/fantastical-parade.webp" }
+    ],
+  },
+   {
+    series: seriesName.B,
     id: "B1a",
     name: "Crimson Blaze",
     logoURL: "/series/crimson-blaze-series.webp",
@@ -238,5 +247,13 @@ export const videoCard: VideosMeta[] = [
   {
     id: "b1a-087",
     url: "/videos/crimson-blaze-video.mp4",
+  },
+  {
+    id: "b2-203",
+    url: "/videos/gardevoir-video.mp4",
+  },
+  {
+    id: "b2-204",
+    url: "/videos/meowth-video.mp4",
   },
 ];
