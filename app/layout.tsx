@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { ThemeProvider } from "next-themes";
 import { SearchProvider } from "./context/SearchContext";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({
@@ -43,6 +43,11 @@ export default function RootLayout({
             })();
           `}
         </Script>
+        <title>Pokémon TCG Pocket Card Explorer</title>
+        <meta
+          name="description"
+          content="A Pokémon TCG Pocket card database with filtering, rarity search"
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex min-h-screen flex-col`}

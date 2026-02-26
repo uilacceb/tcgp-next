@@ -20,23 +20,30 @@ export const seriesName = {
 };
 
 export const pokemonDB: SeriesMeta[] = [
-   {
+  {
+    series: seriesName.B,
+    id: "B2a",
+    name: "Paldean Wonders",
+    logoURL: "/series/paldean-wonders.png",
+    packs: [
+      { name: "Paldean Wonders", src: "/packs/paldean-wonders.png" },
+    ],
+  },
+  {
     series: seriesName.B,
     id: "B2",
     name: "Fantastical Parade",
     logoURL: "/series/fantastical-parade.png",
     packs: [
-      { name: "Fantastical Parade", src: "/packs/fantastical-parade.webp" }
+      { name: "Fantastical Parade", src: "/packs/fantastical-parade.webp" },
     ],
   },
-   {
+  {
     series: seriesName.B,
     id: "B1a",
     name: "Crimson Blaze",
     logoURL: "/series/crimson-blaze-series.webp",
-    packs: [
-      { name: "Crimson Blaze", src: "/packs/crimson_blaze.png" }
-    ],
+    packs: [{ name: "Crimson Blaze", src: "/packs/crimson_blaze.png" }],
   },
   {
     series: seriesName.B,
@@ -255,5 +262,9 @@ export const videoCard: VideosMeta[] = [
   {
     id: "b2-204",
     url: "/videos/meowth-video.mp4",
+  },
+  {
+    id: "b2a-115",
+    url: "/videos/paldean-wonders-video.mp4",
   },
 ];
