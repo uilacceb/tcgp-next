@@ -22,12 +22,24 @@ export const seriesName = {
 export const pokemonDB: SeriesMeta[] = [
   {
     series: seriesName.B,
+    id: "B3",
+    name: "Pulsing Aura",
+    logoURL: "/series/pulsing-aura.webp",
+    packs: [{ name: "Pulsing Aura", src: "/packs/pulsing-aura.webp" }],
+  },
+  {
+    series: seriesName.B,
+    id: "B2b",
+    name: "Mega Shine",
+    logoURL: "/series/mega-shine.png",
+    packs: [{ name: "Mega Shine", src: "/packs/mega-shine.webp" }],
+  },
+  {
+    series: seriesName.B,
     id: "B2a",
     name: "Paldean Wonders",
     logoURL: "/series/paldean-wonders.png",
-    packs: [
-      { name: "Paldean Wonders", src: "/packs/paldean-wonders.png" },
-    ],
+    packs: [{ name: "Paldean Wonders", src: "/packs/paldean-wonders.png" }],
   },
   {
     series: seriesName.B,
@@ -266,5 +278,13 @@ export const videoCard: VideosMeta[] = [
   {
     id: "b2a-115",
     url: "/videos/paldean-wonders-video.mp4",
+  },
+  {
+    id: "b2b-085",
+    url: "/videos/pink-mew-video.mp4",
+  },
+  {
+    id: "b2b-086",
+    url: "/videos/shiny-mew-video.mp4",
   },
 ];
