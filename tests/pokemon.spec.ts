@@ -68,3 +68,5 @@ test.describe("Pokemon 卡片功能測試", () => {
     await expect(page.getByText("Type:Grass")).toBeVisible();
   });
 });
+
+
