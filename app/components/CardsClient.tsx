@@ -56,9 +56,10 @@ export default function CardsClient() {
     };
   }, [params, setUserInput, setFilterResult]);
 
-
   //when there is an input but results haven't arrived yet,
   const q = (userInput ?? "").trim();
+
+  const isEmptySearch = q === "";
   const isSearching = !!q && filterResult.length === 0 && !timedOut;
   const noResults = !!q && filterResult.length === 0 && timedOut;
 
@@ -66,16 +67,19 @@ export default function CardsClient() {
 
   return (
     <div className="px-6 py-8">
-      {isSearching ? (
-        <p className="text-sm opacity-70">Searching…</p>
+      {isEmptySearch ? (
+        <p className="text-sm opacity-70">
+          Please enter a card name to search.
+        </p>
+      ) : isSearching ? (
+        <p className="text-sm opacity-70">Searching...</p>
       ) : noResults ? (
         <p className="text-sm opacity-70">No results available.</p>
       ) : (
         <>
           <div>
             <h1 className="font-bold text-sm pb-4 md:text-2xl">
-              Found {count} cards that include &#39;{userInput.toLowerCase()}
-              &#39;
+              Found {count} cards that include &apos;{q.toLowerCase()}&apos;
             </h1>
           </div>
 
